@@ -16,10 +16,10 @@ Sprint Backlog
 | Alan: Algoritmo para aplicar o desconto 
 |------------------------------------------------------------------------------------------------------------------------------------------
 |Sprint 3: 18/09/24
-|Júlio: Inicío da construção do banco de dados para registro das mercadorias 
-|Thales: Inicío da construção do banco de dados para registro das mercadorias 
+|Júlio: Algoritmo para gerar ID de mercadoria cadastrada
+|Thales: Algoritmo para gerar relatório de produtos faltantes
 |Nicolas: Criação do menu de estoque
-|Samuel: Inicío da construção do banco de dados para registro das mercadorias 
-|Gustavo: Criando do menu do caixa
-|Alan: Criação do menu do relatório
+|Samuel: Algoritmo para reconhecimento de ID de mercadoria cadastrada 
+|Gustavo: Criação do menu de relatórios 
+|Alan: Algoritmo para gerar relatórios de produtos em estoque
 |
