@@ -79,6 +79,8 @@ void welcome_screen() {
 int main() {
     int choice;
 
+    setlocale (LC_ALL, "portuguese");
+
     welcome_screen();
 
     while (1) {
