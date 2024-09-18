@@ -1,16 +1,17 @@
 #include <stdio.h>
-#include <conio.h>
 
-Int main ()
-     float p1, p2, total;
+int main() {
+    float p1, p2, total;
 
-printf ("\nInsira o valor do produto");
-scanf ("%f", &p1);
-printf ("\nInsira o valor do outro produto");
-scanf ("%f", &p2)
+    printf("\nInsira o valor do primeiro produto: ");
+    scanf("%f", &p1);
+    
+    printf("\nInsira o valor do segundo produto: ");
+    scanf("%f", &p2);
 
-  total = p1 + p2;
+    total = p1 + p2;
 
-printf ("\nTotal a pagar: %f", total);
+    printf("\nTotal a pagar: %.2f\n", total);
 
-return 0;
+    return 0;
+}
