@@ -1,21 +1,5 @@
 Product Backlog
 
-O projeto deve atender os seguintes requisitos:
-
-Requisitos obrigatórios:
-1- Deve possuir estrutura de decisão / seleção.
-2- Deve possuir funções antes ou depois da main ou em arquivo separado.
-3- Deve possuir estruturas de dados (Struct).
-4- Deve possuir estruturas de repetição. (MENU)
-5- Deve salvar os dados em arquivo.
-6- Deve fazer leitura dos dados em arquivo.
-
-Requisitos desejáveis:
-7- Banco de dados.
-8- Utilizar ponteiros.
-9- Utilizar alocação dinâmica de memória.
-10- Utilizar filas ou pilhas ou árvores.
-
 Requisitos Funcionais:
 
 - Menu de seleção de módulo
