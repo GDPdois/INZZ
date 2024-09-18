@@ -1,15 +1,25 @@
 Sprint Planning
 |-------------------------------------------------------------------------------------------------------------------------------------------|
 | Sprint 1: 04/09/2024
-| Definição dos cargos da equipe, definição de requisitos, criação de um fluxograma para organização do programa, 
-| separação de caracteres para os menus, estruturas de decisão. 
+| - Definição dos cargos da equipe. 
+| - Definição de requisitos. 
+| - Criação de um fluxograma para organização do programa. 
+| - Separação de caracteres para os menus.
+| - Estruturas de decisão. 
 |-------------------------------------------------------------------------------------------------------------------------------------------|
 | Sprint 2: 11/09/2024
-| Desenvolvimento do sistema de login, algoritmos para soma de produtos, desconto geral e desconto por produto.
+| - Desenvolvimento do sistema de login. 
+| - Algoritmos para soma de produtos. 
+| - Desconto geral.
+| - Desconto por produto.
 |-------------------------------------------------------------------------------------------------------------------------------------------|
 | Sprint 3: 18/09/2024
-| Criação do menu de estoque e menu de relatório, gerar ID de mercadoria, reconhecimento de ID, relatórios de estoque, produtos faltantes,
-| quantidade de produtos.
+| - Criação do menu de estoque e menu de relatório. 
+| - Gerar ID de mercadoria. 
+| - Reconhecimento de ID. 
+| - Relatórios de estoque. 
+| - Produtos faltantes.
+| - Quantidade de produtos.
 |
 |
 |
