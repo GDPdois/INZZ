@@ -1,31 +1,31 @@
 #include <stdio.h>
 
-// Funções que podem ser implementadas para cada relatório
+
 void relatorioVendas() {
     printf("Exibindo relatório de vendas...\n");
-    // Lógica para gerar relatório de vendas
+    
 }
 
 void relatorioEstoque() {
     printf("Exibindo relatório de estoque...\n");
-    // Lógica para gerar relatório de estoque
+   
 }
 
 void relatorioClientes() {
     printf("Exibindo relatório de clientes...\n");
-    // Lógica para gerar relatório de clientes
+    
 }
 
 void relatorioFuncionarios() {
     printf("Exibindo relatório de funcionários...\n");
-    // Lógica para gerar relatório de funcionários
+    
 }
 
 int main() {
     int opcao;
     
     do {
-        // Exibindo o menu de relatórios
+        
         printf("\n--- Menu de Relatórios ---\n");
         printf("1. Relatório de Vendas\n");
         printf("2. Relatório de Estoque\n");
@@ -35,7 +35,7 @@ int main() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
-        // Executando a opção escolhida
+        
         switch(opcao) {
             case 1:
                 relatorioVendas();
