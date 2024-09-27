@@ -25,9 +25,6 @@ printf ("Cadastro do cliente \n");
 printf ("Nome: %c \n",Thales.nome);
 printf ("CPF: %c \n", Thales.cpf);
 printf ("Número: %d \n", Thales.numero);
-
-
-
-
 }
 
+Extramamente bugado, salvei para consertar.
