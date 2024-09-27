@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+// Funções que podem ser implementadas para cada relatório
+void relatorioVendas() {
+    printf("Exibindo relatório de vendas...\n");
+    // Lógica para gerar relatório de vendas
+}
+
+void relatorioEstoque() {
+    printf("Exibindo relatório de estoque...\n");
+    // Lógica para gerar relatório de estoque
+}
+
+void relatorioClientes() {
+    printf("Exibindo relatório de clientes...\n");
+    // Lógica para gerar relatório de clientes
+}
+
+void relatorioFuncionarios() {
+    printf("Exibindo relatório de funcionários...\n");
+    // Lógica para gerar relatório de funcionários
+}
+
+int main() {
+    int opcao;
+    
+    do {
+        // Exibindo o menu de relatórios
+        printf("\n--- Menu de Relatórios ---\n");
+        printf("1. Relatório de Vendas\n");
+        printf("2. Relatório de Estoque\n");
+        printf("3. Relatório de Clientes\n");
+        printf("4. Relatório de Funcionários\n");
+        printf("0. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        // Executando a opção escolhida
+        switch(opcao) {
+            case 1:
+                relatorioVendas();
+                break;
+            case 2:
+                relatorioEstoque();
+                break;
+            case 3:
+                relatorioClientes();
+                break;
+            case 4:
+                relatorioFuncionarios();
+                break;
+            case 0:
+                printf("Saindo do programa...\n");
+                break;
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+        }
+    } while(opcao != 0);
+
+    return 0;
+}
