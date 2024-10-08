@@ -4,4 +4,4 @@ Product Ower - Julio Vasconcelos
 
 Scrum Master - Thales Cotrim
 
-Dev Team - Gustavo Moreira, Nicolas Prado, Alan Oliveira, Samuel Vieira
+Dev Team - Gustavo Moreira, Nicolas Prado, Samuel Vieira.
