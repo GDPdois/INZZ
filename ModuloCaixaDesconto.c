@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <locale.h>
 
 int main () {
+    setlocale(LC_ALL,"");
     float valorCompra, descontoPercentual, valorFinal;
 
     printf("Digite o valor da compra: R$ ");
