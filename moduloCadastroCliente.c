@@ -27,4 +27,4 @@ printf ("CPF: %c \n", Thales.cpf);
 printf ("Número: %d \n", Thales.numero);
 }
 
-Extramamente bugado, salvei para consertar.
+/*Extramamente bugado, salvei para consertar.*/
