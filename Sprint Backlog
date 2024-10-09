@@ -1,39 +1,39 @@
 Sprint Backlog
 |Sprint 1: 04/09/24 
-| Júlio: Definição de requisitos (PRODUCT BACKLOG)
-| Thales: Organização do programa (FLUXOGRAMA)
-| Nicolas: Estrutura de decisão (FLUXOGRAMA)
-| Samuel: Separação de caracteres (Para criação de menu)
-| Gustavo: Definição dos cargos da equipe (READ.ME)
-| Alan: Separação de caracteres (Para criação de menu)
+| Júlio: Definição de requisitos (PRODUCT BACKLOG).
+| Thales: Organização do programa (FLUXOGRAMA).
+| Nicolas: Estrutura de decisão (FLUXOGRAMA).
+| Samuel: Separação de caracteres (Para criação de menu).
+| Gustavo: Definição dos cargos da equipe (READ.ME).
+| Alan: Separação de caracteres (Para criação de menu).
 |-------------------------------------------------------------------------------------------------------------------------------------------|
 |Sprint 2: 11/09/24
-| Júlio: Desenvolvimento do sistema de login (BACKEND)
-| Thales: Algoritmo para soma 
-| Nicolas: Desenvolvimento do sistema de login (FRONTEND)
-| Samuel: Desenvolvimento do sistema de login (BACKEND) 
-| Gustavo: Algoritmo para aplicar o desconto 
-| Alan: Algoritmo para aplicar o desconto 
+| Júlio: Desenvolvimento do sistema de login (BACKEND).
+| Thales: Algoritmo para soma. 
+| Nicolas: Desenvolvimento do sistema de login (FRONTEND).
+| Samuel: Desenvolvimento do sistema de login (BACKEND). 
+| Gustavo: Algoritmo para aplicar o desconto. 
+| Alan: Algoritmo para aplicar o desconto. 
 |------------------------------------------------------------------------------------------------------------------------------------------
 |Sprint 3: 18/09/24
-|Júlio: Algoritmo para gerar ID de mercadoria cadastrada
-|Thales: Algoritmo para gerar relatório de produtos faltantes
-|Nicolas: Criação do menu de estoque
-|Samuel: Algoritmo para reconhecimento de ID de mercadoria cadastrada 
-|Gustavo: Criação do menu de relatórios 
-|Alan: Algoritmo para gerar relatórios de produtos em estoque
+|Júlio: Algoritmo para gerar ID de mercadoria cadastrada.
+|Thales: Algoritmo para gerar relatório de produtos faltantes.
+|Nicolas: Criação do menu de estoque.
+|Samuel: Algoritmo para reconhecimento de ID de mercadoria cadastrada. 
+|Gustavo: Criação do menu de relatórios.
+|Alan: Algoritmo para gerar relatórios de produtos em estoque.
 |------------------------------------------------------------------------------------------------------------------------------------------
 |Sprint 4: 02/10/24
-|Júlio: Cadastro de Mercadoria
-|Thales: Cadastro de cliente
-|Nicolas: Acesso aos diferentes menus
-|Samuel: Cadastro de cliente
-|Gustavo: Acesso aos diferentes menus
+|Júlio: Cadastro de Mercadoria.
+|Thales: Cadastro de cliente.
+|Nicolas: Acesso aos diferentes menus.
+|Samuel: Cadastro de cliente.
+|Gustavo: Acesso aos diferentes menus.
 |------------------------------------------------------------------------------------------------------------------------------------------
 |Sprint 5: 09/10/24
-|Júlio: Transformar os arquivos atuais em funções
-|Thales: Transformar os arquivos atuais em funções
-|Nicolas: Transformar os arquivos atuais em funções
-|Samuel: Transformar os arquivos atuais em funções
-|Gustavo: Transformar os arquivos atuais em funções
+|Júlio: Transformar os módulos atuais em funções.
+|Thales: Transformar os módulos atuais em funções.
+|Nicolas: Transformar os módulos atuais em funções.
+|Samuel: Transformar os módulos atuais em funções.
+|Gustavo: Transformar os módulos atuais em funções.
 |------------------------------------------------------------------------------------------------------------------------------------------
