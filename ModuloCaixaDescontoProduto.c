@@ -20,3 +20,5 @@ setlocale(LC_ALL,"portuguese");
     printf("Preço final do produto: R$ %.2f\n", precoProduto);
     return 0;
 }
+
+//FUNCIONANDO
