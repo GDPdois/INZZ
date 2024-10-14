@@ -31,11 +31,12 @@ int total_produtos = 0;
 int verificar_usuario_existente(const char *nome_usuario) {
     for (int i = 0; i < total_usuarios; i++) {
         if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0) {
-            return 1;  
+            return 1;
         }
     }
     return 0;
 }
+
 
 void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
     if (verificar_usuario_existente(nome_usuario)) {
@@ -49,21 +50,24 @@ void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
     }
 
     strncpy(lista_usuarios[total_usuarios].nome_usuario, nome_usuario, TAMANHO_NOME_USUARIO - 1);
-    lista_usuarios[total_usuarios].nome_usuario[TAMANHO_NOME_USUARIO - 1] = '\0';  
+    lista_usuarios[total_usuarios].nome_usuario[TAMANHO_NOME_USUARIO - 1] = '\0';
     strncpy(lista_usuarios[total_usuarios].senha_usuario, senha_usuario, TAMANHO_SENHA - 1);
-    lista_usuarios[total_usuarios].senha_usuario[TAMANHO_SENHA - 1] = '\0';  
+    lista_usuarios[total_usuarios].senha_usuario[TAMANHO_SENHA - 1] = '\0';
     total_usuarios++;
     printf("\nUsuário registrado com sucesso!\n");
 }
+
 
 int autenticar(const char *nome_usuario, const char *senha_usuario) {
     for (int i = 0; i < total_usuarios; i++) {
         if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0 &&
             strcmp(lista_usuarios[i].senha_usuario, senha_usuario) == 0) {
-            return 1; 
+            return 1;
         }
     }
-    return 0; 
+    return 0;
+}
+
 
 void listar_produtos() {
     printf("\n--- Lista de Produtos ---\n");
@@ -73,12 +77,9 @@ void listar_produtos() {
     }
 
     for (int i = 0; i < total_produtos; i++) {
-        
         float preco = lista_produtos[i].preco_produto;
-        int inteiro = (int)preco; 
-        int centavos = (int)((preco - inteiro) * 100); 
-
-        
+        int inteiro = (int)preco;
+        int centavos = (int)((preco - inteiro) * 100);
         printf("Produto: %s | Quantidade: %d | Preço: %d,%02d\n",
                lista_produtos[i].nome_produto, lista_produtos[i].quantidade_produto, inteiro, centavos);
     }
@@ -86,17 +87,18 @@ void listar_produtos() {
 
 
 void limpar_buffer() {
-    while (getchar() != '\n'); 
+    while (getchar() != '\n');
 }
 
 
 void substituir_virgula_por_ponto(char *string) {
     for (int i = 0; string[i] != '\0'; i++) {
         if (string[i] == ',') {
-            string[i] = '.'; 
+            string[i] = '.';
         }
     }
 }
+
 
 void adicionar_produto() {
     if (total_produtos >= MAX_PRODUTOS) {
@@ -106,25 +108,23 @@ void adicionar_produto() {
 
     char nome_produto[TAMANHO_NOME_PRODUTO];
     int quantidade_produto;
-    char preco_str[20]; 
+    char preco_str[20];
     float preco_produto;
 
     printf("\n--- Adicionar Produto ---\n");
     printf("Nome do produto: ");
-    scanf(" %[^\n]", nome_produto); 
+    scanf(" %[^\n]", nome_produto);
 
     printf("Quantidade: ");
     scanf("%d", &quantidade_produto);
-    
-    
+
     limpar_buffer();
 
     printf("Preço: ");
-    scanf("%s", preco_str); 
-    substituir_virgula_por_ponto(preco_str); 
-    preco_produto = atof(preco_str); 
+    scanf("%s", preco_str);
+    substituir_virgula_por_ponto(preco_str);
+    preco_produto = atof(preco_str);
 
-    
     strncpy(lista_produtos[total_produtos].nome_produto, nome_produto, TAMANHO_NOME_PRODUTO - 1);
     lista_produtos[total_produtos].nome_produto[TAMANHO_NOME_PRODUTO - 1] = '\0';  // Terminação nula
     lista_produtos[total_produtos].quantidade_produto = quantidade_produto;
@@ -134,17 +134,18 @@ void adicionar_produto() {
     printf("\nProduto adicionado com sucesso!\n");
 }
 
+
 void remover_produto() {
     char nome_produto[TAMANHO_NOME_PRODUTO];
 
     printf("\n--- Remover Produto ---\n");
     printf("Nome do produto: ");
-    scanf(" %[^\n]", nome_produto); 
+    scanf(" %[^\n]", nome_produto);
 
     for (int i = 0; i < total_produtos; i++) {
         if (strcmp(lista_produtos[i].nome_produto, nome_produto) == 0) {
             for (int j = i; j < total_produtos - 1; j++) {
-                lista_produtos[j] = lista_produtos[j + 1]; 
+                lista_produtos[j] = lista_produtos[j + 1];
             }
             total_produtos--;
             printf("\nProduto removido com sucesso!\n");
@@ -154,19 +155,21 @@ void remover_produto() {
     printf("\nProduto não encontrado.\n");
 }
 
+
 int obter_opcao_menu() {
     int opcao;
     while (1) {
         printf("Escolha uma opção: ");
         if (scanf("%d", &opcao) == 1) {
-            limpar_buffer(); 
+            limpar_buffer();
             return opcao;
         } else {
             printf("Entrada inválida! Tente novamente.\n");
-            limpar_buffer(); 
+            limpar_buffer();
         }
     }
 }
+
 
 void menu_estoque() {
     int opcao;
@@ -176,8 +179,8 @@ void menu_estoque() {
         printf("2. Listar Produtos\n");
         printf("3. Remover Produto\n");
         printf("4. Voltar ao Menu Principal\n");
-        
-        opcao = obter_opcao_menu(); 
+
+        opcao = obter_opcao_menu();
 
         switch (opcao) {
             case 1:
@@ -190,12 +193,13 @@ void menu_estoque() {
                 remover_produto();
                 break;
             case 4:
-                return; 
+                return;
             default:
                 printf("\nOpção inválida! Tente novamente.\n");
         }
     }
 }
+
 
 void registrar_usuario() {
     char nome_usuario[TAMANHO_NOME_USUARIO];
@@ -203,12 +207,13 @@ void registrar_usuario() {
 
     printf("\n--- Registro de Usuário ---\n");
     printf("Digite o nome de usuário: ");
-    scanf(" %[^\n]", nome_usuario); 
+    scanf(" %[^\n]", nome_usuario);
     printf("Digite a senha: ");
-    scanf(" %[^\n]", senha_usuario); 
+    scanf(" %[^\n]", senha_usuario);
 
     adicionar_usuario(nome_usuario, senha_usuario);
 }
+
 
 void login_usuario() {
     char nome_usuario[TAMANHO_NOME_USUARIO];
@@ -228,6 +233,7 @@ void login_usuario() {
     }
 }
 
+
 void tela_boas_vindas() {
     printf("\n");
     printf("****************************************\n");
@@ -236,6 +242,7 @@ void tela_boas_vindas() {
     printf("*                                      *\n");
     printf("****************************************\n");
 }
+
 
 int main() {
     int opcao;
