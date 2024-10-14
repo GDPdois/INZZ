@@ -5,429 +5,263 @@
 #include <string.h>
 #include <locale.h>
 
-#define MAX_USERS 10
-#define USERNAME_LEN 20
-#define PASSWORD_LEN 20
-#define MAX_PRODUCTS 50
-#define PRODUCT_NAME_LEN 50
+#define MAX_USUARIOS 10
+#define TAMANHO_NOME_USUARIO 20
+#define TAMANHO_SENHA 20
+#define MAX_PRODUTOS 50
+#define TAMANHO_NOME_PRODUTO 50
 
 typedef struct {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
-} User;
+    char nome_usuario[TAMANHO_NOME_USUARIO];
+    char senha_usuario[TAMANHO_SENHA];
+} Usuario;
 
 typedef struct {
-    char name[PRODUCT_NAME_LEN];
-    int quantity;
-    float price;
-} Product;
+    char nome_produto[TAMANHO_NOME_PRODUTO];
+    int quantidade_produto;
+    float preco_produto;
+} Produto;
 
-User users[MAX_USERS];
-Product products[MAX_PRODUCTS];
-int user_count = 0;
-int product_count = 0;
+Usuario lista_usuarios[MAX_USUARIOS];
+Produto lista_produtos[MAX_PRODUTOS];
+int total_usuarios = 0;
+int total_produtos = 0;
 
 
-void add_user(const char *username, const char *password) {
-    if (user_count >= MAX_USERS) {
-        printf("\nNúmero máximo de usuários atingido.\n");
-        return;
-    }
-    strncpy(users[user_count].username, username, USERNAME_LEN);
-    strncpy(users[user_count].password, password, PASSWORD_LEN);
-    user_count++;
-}
-
-int authenticate(const char *username, const char *password) {
-    for (int i = 0; i < user_count; i++) {
-        if (strcmp(users[i].username, username) == 0 &&
-            strcmp(users[i].password, password) == 0) {
-            return 1;
+int verificar_usuario_existente(const char *nome_usuario) {
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0) {
+            return 1;  
         }
     }
     return 0;
 }
 
-void register_user() {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
-
-    printf("\n--- Registro de Usuário ---\n");
-    printf("Digite o nome de usuário: ");
-    scanf("%s", username);
-    fflush (stdin);
-    printf("Digite a senha: ");
-    scanf("%s", password);
-
-    add_user(username, password);
-    printf("\nUsuário registrado com sucesso!\n");
-}
-
-void login_user() {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
-
-    printf("\n--- Login ---\n");
-    printf("Digite o nome de usuário: ");
-    scanf("%s", username);
-    fflush (stdin);
-    printf("Digite a senha: ");
-    scanf("%s", password);
-
-    if (authenticate(username, password)) {
-        printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", username);
-
-        stock_menu();
-    } else {
-        printf("\nNome de usuário ou senha incorretos.\n");
-    }
-}
-
-
-void add_product() {
-    if (product_count >= MAX_PRODUCTS) {
-        printf("\nEstoque cheio! Não é possível adicionar mais produtos.\n");
+void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
+    if (verificar_usuario_existente(nome_usuario)) {
+        printf("\nErro: Nome de usuário já existe. Tente outro.\n");
         return;
     }
 
-    char name[PRODUCT_NAME_LEN];
-    int quantity;
-    float price;
+    if (total_usuarios >= MAX_USUARIOS) {
+        printf("\nNúmero máximo de usuários atingido.\n");
+        return;
+    }
 
-    printf("\n--- Adicionar Produto ---\n");
-    printf("Nome do produto: ");
-    scanf("%s", name);
-    printf("Quantidade: ");
-    scanf("%d", &quantity);
-    printf("Preço: ");
-    scanf("%f", &price);
-
-    strncpy(products[product_count].name, name, PRODUCT_NAME_LEN);
-    products[product_count].quantity = quantity;
-    products[product_count].price = price;
-    product_count++;
-
-    printf("\nProduto adicionado com sucesso!\n");
+    strncpy(lista_usuarios[total_usuarios].nome_usuario, nome_usuario, TAMANHO_NOME_USUARIO - 1);
+    lista_usuarios[total_usuarios].nome_usuario[TAMANHO_NOME_USUARIO - 1] = '\0';  
+    strncpy(lista_usuarios[total_usuarios].senha_usuario, senha_usuario, TAMANHO_SENHA - 1);
+    lista_usuarios[total_usuarios].senha_usuario[TAMANHO_SENHA - 1] = '\0';  
+    total_usuarios++;
+    printf("\nUsuário registrado com sucesso!\n");
 }
 
-void list_products() {
+int autenticar(const char *nome_usuario, const char *senha_usuario) {
+    for (int i = 0; i < total_usuarios; i++) {
+        if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0 &&
+            strcmp(lista_usuarios[i].senha_usuario, senha_usuario) == 0) {
+            return 1; 
+        }
+    }
+    return 0; 
+
+void listar_produtos() {
     printf("\n--- Lista de Produtos ---\n");
-    if (product_count == 0) {
+    if (total_produtos == 0) {
         printf("Nenhum produto no estoque.\n");
         return;
     }
 
-    for (int i = 0; i < product_count; i++) {
-        printf("Produto: %s | Quantidade: %d | Preço: %.2f\n",
-               products[i].name, products[i].quantity, products[i].price);
+    for (int i = 0; i < total_produtos; i++) {
+        
+        float preco = lista_produtos[i].preco_produto;
+        int inteiro = (int)preco; 
+        int centavos = (int)((preco - inteiro) * 100); 
+
+        
+        printf("Produto: %s | Quantidade: %d | Preço: %d,%02d\n",
+               lista_produtos[i].nome_produto, lista_produtos[i].quantidade_produto, inteiro, centavos);
     }
 }
 
-void remove_product() {
-    char name[PRODUCT_NAME_LEN];
+
+void limpar_buffer() {
+    while (getchar() != '\n'); 
+}
+
+
+void substituir_virgula_por_ponto(char *string) {
+    for (int i = 0; string[i] != '\0'; i++) {
+        if (string[i] == ',') {
+            string[i] = '.'; 
+        }
+    }
+}
+
+void adicionar_produto() {
+    if (total_produtos >= MAX_PRODUTOS) {
+        printf("\nEstoque cheio! Não é possível adicionar mais produtos.\n");
+        return;
+    }
+
+    char nome_produto[TAMANHO_NOME_PRODUTO];
+    int quantidade_produto;
+    char preco_str[20]; 
+    float preco_produto;
+
+    printf("\n--- Adicionar Produto ---\n");
+    printf("Nome do produto: ");
+    scanf(" %[^\n]", nome_produto); 
+
+    printf("Quantidade: ");
+    scanf("%d", &quantidade_produto);
+    
+    
+    limpar_buffer();
+
+    printf("Preço: ");
+    scanf("%s", preco_str); 
+    substituir_virgula_por_ponto(preco_str); 
+    preco_produto = atof(preco_str); 
+
+    
+    strncpy(lista_produtos[total_produtos].nome_produto, nome_produto, TAMANHO_NOME_PRODUTO - 1);
+    lista_produtos[total_produtos].nome_produto[TAMANHO_NOME_PRODUTO - 1] = '\0';  // Terminação nula
+    lista_produtos[total_produtos].quantidade_produto = quantidade_produto;
+    lista_produtos[total_produtos].preco_produto = preco_produto;
+    total_produtos++;
+
+    printf("\nProduto adicionado com sucesso!\n");
+}
+
+void remover_produto() {
+    char nome_produto[TAMANHO_NOME_PRODUTO];
 
     printf("\n--- Remover Produto ---\n");
     printf("Nome do produto: ");
-    scanf("%s", name);
+    scanf(" %[^\n]", nome_produto); 
 
-    for (int i = 0; i < product_count; i++) {
-        if (strcmp(products[i].name, name) == 0) {
-            for (int j = i; j < product_count - 1; j++) {
-                products[j] = products[j + 1];
+    for (int i = 0; i < total_produtos; i++) {
+        if (strcmp(lista_produtos[i].nome_produto, nome_produto) == 0) {
+            for (int j = i; j < total_produtos - 1; j++) {
+                lista_produtos[j] = lista_produtos[j + 1]; 
             }
-            product_count--;
+            total_produtos--;
             printf("\nProduto removido com sucesso!\n");
             return;
         }
     }
-
     printf("\nProduto não encontrado.\n");
 }
 
-void stock_menu() {
-    int choice;
+int obter_opcao_menu() {
+    int opcao;
+    while (1) {
+        printf("Escolha uma opção: ");
+        if (scanf("%d", &opcao) == 1) {
+            limpar_buffer(); 
+            return opcao;
+        } else {
+            printf("Entrada inválida! Tente novamente.\n");
+            limpar_buffer(); 
+        }
+    }
+}
+
+void menu_estoque() {
+    int opcao;
     while (1) {
         printf("\n--- Menu de Estoque ---\n");
         printf("1. Adicionar Produto\n");
         printf("2. Listar Produtos\n");
         printf("3. Remover Produto\n");
         printf("4. Voltar ao Menu Principal\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &choice);
+        
+        opcao = obter_opcao_menu(); 
 
-        switch (choice) {
+        switch (opcao) {
             case 1:
-                add_product();
+                adicionar_produto();
                 break;
             case 2:
-                list_products();
+                listar_produtos();
                 break;
             case 3:
-                remove_product();
+                remover_produto();
                 break;
             case 4:
-                return;
+                return; 
             default:
                 printf("\nOpção inválida! Tente novamente.\n");
         }
     }
 }
 
-
-void welcome_screen() {
-    printf("\n");
-    printf("****************************************\n");
-    printf("*                                      *\n");
-    printf("*          BEM-VINDO AO MERCADO         *\n");
-    printf("*                                      *\n");
-    printf("****************************************\n");
-}
-
-
-int main() {
-    int choice;
-
-    setlocale (LC_ALL, "portuguese");
-
-    welcome_screen();
-
-    while (1) {
-        printf("\n--- Menu Principal ---\n");
-        printf("1. Registrar\n");
-        printf("2. Login\n");
-        printf("3. Sair\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                register_user();
-                break;
-            case 2:
-                login_user();
-                break;
-            case 3:
-                printf("\nSaindo...\n");
-                exit(0);
-            default:
-                printf("\nOpção inválida! Tente novamente.\n");
-        }
-    }
-
-//Sprint 11/09 Interface Frontend (Nicolas)
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <locale.h>
-
-#define MAX_USERS 10
-#define USERNAME_LEN 20
-#define PASSWORD_LEN 20
-#define MAX_PRODUCTS 50
-#define PRODUCT_NAME_LEN 50
-
-typedef struct {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
-} User;
-
-typedef struct {
-    char name[PRODUCT_NAME_LEN];
-    int quantity;
-    float price;
-} Product;
-
-User users[MAX_USERS];
-Product products[MAX_PRODUCTS];
-int user_count = 0;
-int product_count = 0;
-
-
-void add_user(const char *username, const char *password) {
-    if (user_count >= MAX_USERS) {
-        printf("\nNúmero máximo de usuários atingido.\n");
-        return;
-    }
-    strncpy(users[user_count].username, username, USERNAME_LEN);
-    strncpy(users[user_count].password, password, PASSWORD_LEN);
-    user_count++;
-}
-
-int authenticate(const char *username, const char *password) {
-    for (int i = 0; i < user_count; i++) {
-        if (strcmp(users[i].username, username) == 0 &&
-            strcmp(users[i].password, password) == 0) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-void register_user() {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
+void registrar_usuario() {
+    char nome_usuario[TAMANHO_NOME_USUARIO];
+    char senha_usuario[TAMANHO_SENHA];
 
     printf("\n--- Registro de Usuário ---\n");
     printf("Digite o nome de usuário: ");
-    scanf("%s", username);
+    scanf(" %[^\n]", nome_usuario); 
     printf("Digite a senha: ");
-    scanf("%s", password);
+    scanf(" %[^\n]", senha_usuario); 
 
-    add_user(username, password);
-    printf("\nUsuário registrado com sucesso!\n");
+    adicionar_usuario(nome_usuario, senha_usuario);
 }
 
-void login_user() {
-    char username[USERNAME_LEN];
-    char password[PASSWORD_LEN];
+void login_usuario() {
+    char nome_usuario[TAMANHO_NOME_USUARIO];
+    char senha_usuario[TAMANHO_SENHA];
 
     printf("\n--- Login ---\n");
-    printf("Digite o nome de usuário: ");
-    scanf("%s", username);
-    printf("Digite a senha: ");
-    scanf("%s", password);
+    printf("Nome de usuário: ");
+    scanf(" %[^\n]", nome_usuario);
+    printf("Senha: ");
+    scanf(" %[^\n]", senha_usuario);
 
-    if (authenticate(username, password)) {
-        printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", username);
-
-        stock_menu();
+    if (autenticar(nome_usuario, senha_usuario)) {
+        printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", nome_usuario);
+        menu_estoque();
     } else {
         printf("\nNome de usuário ou senha incorretos.\n");
     }
 }
 
-
-void add_product() {
-    if (product_count >= MAX_PRODUCTS) {
-        printf("\nEstoque cheio! Não é possível adicionar mais produtos.\n");
-        return;
-    }
-
-    char name[PRODUCT_NAME_LEN];
-    int quantity;
-    float price;
-
-    printf("\n--- Adicionar Produto ---\n");
-    printf("Nome do produto: ");
-    scanf("%s", name);
-    printf("Quantidade: ");
-    scanf("%d", &quantity);
-    printf("Preço: ");
-    scanf("%f", &price);
-
-    strncpy(products[product_count].name, name, PRODUCT_NAME_LEN);
-    products[product_count].quantity = quantity;
-    products[product_count].price = price;
-    product_count++;
-
-    printf("\nProduto adicionado com sucesso!\n");
-}
-
-void list_products() {
-    printf("\n--- Lista de Produtos ---\n");
-    if (product_count == 0) {
-        printf("Nenhum produto no estoque.\n");
-        return;
-    }
-
-    for (int i = 0; i < product_count; i++) {
-        printf("Produto: %s | Quantidade: %d | Preço: %.2f\n",
-               products[i].name, products[i].quantity, products[i].price);
-    }
-}
-
-void remove_product() {
-    char name[PRODUCT_NAME_LEN];
-
-    printf("\n--- Remover Produto ---\n");
-    printf("Nome do produto: ");
-    scanf("%s", name);
-
-    for (int i = 0; i < product_count; i++) {
-        if (strcmp(products[i].name, name) == 0) {
-            for (int j = i; j < product_count - 1; j++) {
-                products[j] = products[j + 1];
-            }
-            product_count--;
-            printf("\nProduto removido com sucesso!\n");
-            return;
-        }
-    }
-
-    printf("\nProduto não encontrado.\n");
-}
-
-void stock_menu() {
-    int choice;
-    while (1) {
-        printf("\n--- Menu de Estoque ---\n");
-        printf("1. Adicionar Produto\n");
-        printf("2. Listar Produtos\n");
-        printf("3. Remover Produto\n");
-        printf("4. Voltar ao Menu Principal\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                add_product();
-                break;
-            case 2:
-                list_products();
-                break;
-            case 3:
-                remove_product();
-                break;
-            case 4:
-                return;
-            default:
-                printf("\nOpção inválida! Tente novamente.\n");
-        }
-    }
-}
-
-
-void welcome_screen() {
+void tela_boas_vindas() {
     printf("\n");
     printf("****************************************\n");
     printf("*                                      *\n");
-    printf("*          BEM-VINDO AO MERCADO         *\n");
+    printf("*          BEM-VINDO AO MERCADO        *\n");
     printf("*                                      *\n");
     printf("****************************************\n");
 }
 
-
 int main() {
-    int choice;
-
-    setlocale (LC_ALL, "portuguese");
-
-    welcome_screen();
+    int opcao;
+    setlocale(LC_ALL, "pt_BR.UTF-8");
+    tela_boas_vindas();
 
     while (1) {
         printf("\n--- Menu Principal ---\n");
         printf("1. Registrar\n");
         printf("2. Login\n");
         printf("3. Sair\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &choice);
+        opcao = obter_opcao_menu();
 
-        switch (choice) {
+        switch (opcao) {
             case 1:
-                register_user();
+                registrar_usuario();
                 break;
             case 2:
-                login_user();
+                login_usuario();
                 break;
             case 3:
                 printf("\nSaindo...\n");
-                exit(0);
+                return 0;
             default:
                 printf("\nOpção inválida! Tente novamente.\n");
         }
     }
+}
 
-    return 0;
-}
-}
