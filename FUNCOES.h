@@ -1,70 +1,85 @@
+// por enquanto tá com bug que o total fica zerado quando passa pra função moduloCaixaSoma mas já tô arrumando
+// ARQUIVO DE FUNÇÕES
 
-//ARQUIVO DE FUNÇÕES
+// EXIBE PRODUTOS
 
-//SOMA PRODUTOS
+void exibeProdutos(int i, float valorProdutos[], float total){
+    for(int j = 0; j < i; j++){
+        printf("\n\tProduto %d: R$ %.2f", j + 1, valorProdutos[j]);
+    }
+
+    if(i > 0) printf("\n\t\t-");
+
+    printf("\n\t  Total: R$ %.2f \n", total);
+    printf("\n----------------------------------\n");
+}
+
+// SOMA PRODUTOS
 
 float somaProdutos(){
-    float preco[100], total=0;
-    char controle='S';
-    int i=0;
+    float valorProdutos[100], total = 0;
+    char controle;
+    int i = 0;
+
     do{
-
-    printf("\nO valor total da compra está em %.2f \n", total);
-    printf("Digite o valor do %dº produto \n", i+1);
-    scanf("%f", &preco[i]);
-    total += preco[i];
-    i++;
+        exibeProdutos(i, valorProdutos, total);
 
 
-    printf("Quer mais? Caso sim digite S \n");
-    fflush(stdin);
-    scanf("%c", &controle);
-    controle=tolower(controle);
-    system("cls");
+        printf("\nDigite o valor do %dº produto: R$ ", i+1);
+        scanf("%f", &valorProdutos[i]);
+
+        total += valorProdutos[i];
+        i++;
+
+        system("cls");
+
+        exibeProdutos(i, valorProdutos, total);
+
+        printf("\nAdicionar mais um produto? (S/N)\n");
+        printf("Escolha: ");
+        fflush(stdin);
+        scanf("%c", &controle);
+
+        controle = tolower(controle);
+        system("cls");
 
     }
     while(controle == 's');
 
-    printf("O valor da compra foi %.2f", total);
+    printf("Total: %f", total);
+    getch();
+
+    moduloCaixaDesconto(i, valorProdutos, total);
 
     return total;
 }
 
-//MÓDULO CAIXA DESCONTO
+// MÓDULO CAIXA DESCONTO
 
-void moduloCaixaDesconto(float totalSemDesc){
-    float /*valorCompra,*/ descontoPercentual, valorFinal;
-
-    /*do{
-        printf("\nDigite o valor da compra: R$ ");
-        scanf("%f", &valorCompra);
-
-        if(valorCompra <= 0){
-            system("cls");
-            printf("***O valor da compra não pode ser 0!\n");
-        }
-    }
-    while(valorCompra <= 0);
-
-    system("cls");*/
+void moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
+    float descontoPercentual, valorDesconto, valorFinal;
 
     do{
-        printf("\nValor da compra: R$ %.2f\n", totalSemDesc);
+        exibeProdutos(i, valorProdutos, totalSemDesc);
+
+        printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
         printf("\nDigite a porcentagem do desconto: ");
         scanf("%f", &descontoPercentual);
 
-        if(descontoPercentual <= 0 || descontoPercentual > 100){
+        if(descontoPercentual < 0 || descontoPercentual > 100){
             system("cls");
-            printf("***O valor do desconto deve estar entre 1 e 100!\n");
+            printf("***O valor do desconto deve estar entre 0 e 100!\n");
+            printf("\n-------------------------------------------------\n");
         }
     }
     while(descontoPercentual <= 0 || descontoPercentual > 100);
 
     valorFinal = totalSemDesc - (totalSemDesc * descontoPercentual / 100);
+    valorDesconto = totalSemDesc - valorFinal;
 
     system("cls");
 
-    printf("\nValor da compra: R$ %.2f\n", totalSemDesc);
-    printf("\nDesconto: %.f%%\n", descontoPercentual);
-    printf("\nValor final: R$ %.2f\n", valorFinal);
+    printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
+    printf("\nDesconto: %.f%% -> -%.2f\n", descontoPercentual, valorDesconto);
+    printf("\nTotal com desconto: R$ %.2f\n", valorFinal);
 }
