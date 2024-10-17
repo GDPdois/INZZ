@@ -40,7 +40,8 @@ float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     system("cls");
 
     printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
-    printf("\nDesconto: %.f%% -> -%.2f\n", descontoPercentual, valorDesconto);
+    printf("\n          Desconto: %.f%%", descontoPercentual);
+    printf("\n  Valor descontado: R$ %.2f\n", valorDesconto);
     printf("\nTotal com desconto: R$ %.2f\n", valorFinal);
 
     return valorFinal;
