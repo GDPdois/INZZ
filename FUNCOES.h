@@ -1,4 +1,4 @@
-// por enquanto tá com bug que o total fica zerado quando passa pra função moduloCaixaSoma mas já tô arrumando
+
 // ARQUIVO DE FUNÇÕES
 
 // EXIBE PRODUTOS
@@ -12,6 +12,36 @@ void exibeProdutos(int i, float valorProdutos[], float total){
 
     printf("\n\t  Total: R$ %.2f \n", total);
     printf("\n----------------------------------\n");
+}
+
+// MÓDULO CAIXA DESCONTO
+
+void moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
+    float descontoPercentual, valorDesconto, valorFinal;
+
+    do{
+        exibeProdutos(i, valorProdutos, totalSemDesc);
+
+        printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
+        printf("\nDigite a porcentagem do desconto: ");
+        scanf("%f", &descontoPercentual);
+
+        if(descontoPercentual < 0 || descontoPercentual > 100){
+            system("cls");
+            printf("***O valor do desconto deve estar entre 0 e 100!\n");
+            printf("\n-------------------------------------------------\n");
+        }
+    }
+    while(descontoPercentual <= 0 || descontoPercentual > 100);
+
+    valorFinal = totalSemDesc - (totalSemDesc * descontoPercentual / 100);
+    valorDesconto = totalSemDesc - valorFinal;
+
+    system("cls");
+
+    printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
+    printf("\nDesconto: %.f%% -> -%.2f\n", descontoPercentual, valorDesconto);
+    printf("\nTotal com desconto: R$ %.2f\n", valorFinal);
 }
 
 // SOMA PRODUTOS
@@ -52,34 +82,4 @@ float somaProdutos(){
     moduloCaixaDesconto(i, valorProdutos, total);
 
     return total;
-}
-
-// MÓDULO CAIXA DESCONTO
-
-void moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
-    float descontoPercentual, valorDesconto, valorFinal;
-
-    do{
-        exibeProdutos(i, valorProdutos, totalSemDesc);
-
-        printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
-        printf("\nDigite a porcentagem do desconto: ");
-        scanf("%f", &descontoPercentual);
-
-        if(descontoPercentual < 0 || descontoPercentual > 100){
-            system("cls");
-            printf("***O valor do desconto deve estar entre 0 e 100!\n");
-            printf("\n-------------------------------------------------\n");
-        }
-    }
-    while(descontoPercentual <= 0 || descontoPercentual > 100);
-
-    valorFinal = totalSemDesc - (totalSemDesc * descontoPercentual / 100);
-    valorDesconto = totalSemDesc - valorFinal;
-
-    system("cls");
-
-    printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
-    printf("\nDesconto: %.f%% -> -%.2f\n", descontoPercentual, valorDesconto);
-    printf("\nTotal com desconto: R$ %.2f\n", valorFinal);
 }
