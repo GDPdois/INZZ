@@ -74,7 +74,6 @@ float somaProdutos(){
 
         op = tolower(op);
         system("cls");
-
     }
     while(op == 's' || op == '1');
 
