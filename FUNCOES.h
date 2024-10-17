@@ -16,7 +16,7 @@ void exibeProdutos(int i, float valorProdutos[], float total){
 
 // MÓDULO CAIXA DESCONTO
 
-void moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
+float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     float descontoPercentual, valorDesconto, valorFinal;
 
     do{
@@ -42,13 +42,15 @@ void moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
     printf("\nDesconto: %.f%% -> -%.2f\n", descontoPercentual, valorDesconto);
     printf("\nTotal com desconto: R$ %.2f\n", valorFinal);
+
+    return valorFinal;
 }
 
 // SOMA PRODUTOS
 
 float somaProdutos(){
     float valorProdutos[100], total = 0;
-    char controle;
+    char op;
     int i = 0;
 
     do{
@@ -66,17 +68,17 @@ float somaProdutos(){
         exibeProdutos(i, valorProdutos, total);
 
         printf("\nAdicionar mais um produto? (S/N)\n");
-        printf("Escolha: ");
+        printf(" - Escolha: ");
         fflush(stdin);
-        scanf("%c", &controle);
+        scanf("%c", &op);
 
-        controle = tolower(controle);
+        op = tolower(op);
         system("cls");
 
     }
-    while(controle == 's');
+    while(op == 's' || op == '1');
 
-    moduloCaixaDesconto(i, valorProdutos, total);
+    total = moduloCaixaDesconto(i, valorProdutos, total);
 
     return total;
 }
