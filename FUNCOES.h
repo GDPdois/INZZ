@@ -62,8 +62,7 @@ float somaProdutos(){
 
     do{
         exibeProdutos(i, valorProdutos, total);
-
-
+        
         printf("\nDigite o valor do %dº produto: R$ ", i+1);
         scanf("%f", &valorProdutos[i]);
 
