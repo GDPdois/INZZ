@@ -1,7 +1,13 @@
 
 // ARQUIVO DE FUNÇÕES
 
-// EXIBE PRODUTOS
+// LIMPA TELA (limpa a tela)
+
+void limpaTela(){
+    system("cls");
+}
+
+// EXIBE PRODUTOS (exibe os produtos)
 
 void exibeProdutos(int i, float valorProdutos[], float total){
     for(int j = 0; j < i; j++){
@@ -14,7 +20,7 @@ void exibeProdutos(int i, float valorProdutos[], float total){
     printf("\n----------------------------------\n");
 }
 
-// MÓDULO CAIXA DESCONTO
+// MÓDULO CAIXA DESCONTO (calcula o desconto)
 
 float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     float descontoPercentual, valorDesconto, valorFinal;
@@ -37,7 +43,7 @@ float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     valorFinal = totalSemDesc - (totalSemDesc * descontoPercentual / 100);
     valorDesconto = totalSemDesc - valorFinal;
 
-    system("cls");
+    limpaTela();
 
     printf("\nTotal sem desconto: R$ %.2f\n", totalSemDesc);
     printf("\n          Desconto: %.f%%", descontoPercentual);
@@ -47,7 +53,7 @@ float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     return valorFinal;
 }
 
-// SOMA PRODUTOS
+// SOMA PRODUTOS (soma os produtos)
 
 float somaProdutos(){
     float valorProdutos[100], total = 0;
@@ -64,7 +70,7 @@ float somaProdutos(){
         total += valorProdutos[i];
         i++;
 
-        system("cls");
+        limpaTela();
 
         exibeProdutos(i, valorProdutos, total);
 
@@ -74,7 +80,8 @@ float somaProdutos(){
         scanf("%c", &op);
 
         op = tolower(op);
-        system("cls");
+
+        limpaTela();
     }
     while(op == 's' || op == '1');
 
