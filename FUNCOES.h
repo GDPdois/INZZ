@@ -76,9 +76,6 @@ float somaProdutos(){
     }
     while(controle == 's');
 
-    printf("Total: %f", total);
-    getch();
-
     moduloCaixaDesconto(i, valorProdutos, total);
 
     return total;
