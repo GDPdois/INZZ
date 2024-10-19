@@ -24,7 +24,7 @@ void carregar_estoque() {
     if (arquivo != NULL) {
         while (fscanf(arquivo, "%d %49s %d %f %f %f\n", &estoque[total_produtos].id, estoque[total_produtos].nome,
                       &estoque[total_produtos].quantidade, &estoque[total_produtos].preco_compra,
-                      &estoque[total_produtos].preco_venda, &estoque[total_produtos].desconto) != EOF) {
+                      &estoque[total_produtos].preco_venda, &estoque[total_produtos].desconto) == 6) {
             total_produtos++;
         }
         fclose(arquivo);
