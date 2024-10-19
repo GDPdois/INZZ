@@ -38,7 +38,7 @@ void carregar_estoque() {
 }
 
 void salvar_estoque() {
-    FILE *arquivo = fopen("estoque.txt", "a");
+    FILE *arquivo = fopen("estoque.txt", "w");
     if (arquivo != NULL) {
         for (int i = 0; i < total_produtos; i++) {
             fprintf(arquivo, "%d %s %d %.2f %.2f %.2f\n", estoque[i].id, estoque[i].nome, estoque[i].quantidade,
@@ -54,7 +54,7 @@ void adicionar_produto() {
         return;
     }
     Produto novo_produto;
-    novo_produto.id = total_produtos + 1;
+    novo_produto.id = (total_produtos == 0) ? 1 : estoque[total_produtos - 1].id + 1;
     printf("Digite o nome do produto: ");
     scanf("%s", novo_produto.nome);
     fflush(stdin);
