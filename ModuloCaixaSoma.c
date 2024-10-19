@@ -1,19 +1,34 @@
 #include <stdio.h>
+#include <ctype.h>
+#include <locale.h>
 
 int main() {
-    float p1, p2, total;
+setlocale(LC_ALL,"");
 
-    printf("\nInsira o valor do primeiro produto: ");
-    scanf("%f", &p1);
-    
-    printf("\nInsira o valor do segundo produto: ");
-    scanf("%f", &p2);
+    float preco[100], total=0;
+    char controle='S';
+int i=0;
+do {
 
-    total = p1 + p2;
+    printf ("\nO valor total da compra está em %.2f \n", total);
+    printf ("Digite o valor do %dº produto \n", i+1);
+    scanf ("%f", &preco[i]);
+    total += preco[i];
+    i++;
 
-    printf("\nTotal a pagar: %.2f\n", total);
 
-    return 0;
+    printf ("Quer mais? Caso sim digite S \n");
+    fflush(stdin);
+    scanf ("%c", &controle);
+    controle=tolower(controle);
+    system("cls");
+
+}
+while (controle == 's');
+
+printf ("O valor da compra foi %.2f", total);
+
+
 }
 
 //FUNCIONANDO
