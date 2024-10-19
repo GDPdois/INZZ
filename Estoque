@@ -101,9 +101,9 @@ void listar_produtos() {
 }
 
 int main() {
-    setlocale(LC_ALL,"");
     carregar_estoque();
     int opcao;
+    setlocale(LC_ALL,"");
     do {
         printf("\n=== Sistema de Controle de Estoque ===\n");
         printf("1. Adicionar produto\n");
