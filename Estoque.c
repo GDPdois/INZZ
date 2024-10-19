@@ -20,14 +20,20 @@ Produto estoque[MaxProdutos];
 int total_produtos = 0;
 
 void carregar_estoque() {
-    FILE *arquivo = fopen("estoque.txt", "a");
+    FILE *arquivo = fopen("estoque.txt", "r");
     if (arquivo != NULL) {
-        while (fscanf(arquivo, "%d %s %d %f %f %f\n", &estoque[total_produtos].id, estoque[total_produtos].nome,
+        while (fscanf(arquivo, "%d %49s %d %f %f %f\n", &estoque[total_produtos].id, estoque[total_produtos].nome,
                       &estoque[total_produtos].quantidade, &estoque[total_produtos].preco_compra,
                       &estoque[total_produtos].preco_venda, &estoque[total_produtos].desconto) != EOF) {
             total_produtos++;
         }
         fclose(arquivo);
+    } else {
+        // Se o arquivo não existir, cria um novo arquivo vazio
+        arquivo = fopen("estoque.txt", "w");
+        if (arquivo != NULL) {
+            fclose(arquivo);
+        }
     }
 }
 
