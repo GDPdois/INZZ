@@ -68,7 +68,7 @@ void adicionar_produto() {
     estoque[total_produtos] = novo_produto;
     total_produtos++;
     salvar_estoque();
-    printf("Produto adicionado com sucesso!\n");
+    printf("Produto %s adicionado com sucesso!\n", novo_produto.nome);
 }
 
 void editar_quantidade() {
