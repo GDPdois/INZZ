@@ -1,61 +1,32 @@
 #include <stdio.h>
 
-
-void relatorioVendas() {
-    printf("Exibindo relatório de vendas...\n");
-    
-}
-
-void relatorioEstoque() {
-    printf("Exibindo relatório de estoque...\n");
-   
-}
-
-void relatorioClientes() {
-    printf("Exibindo relatório de clientes...\n");
-    
-}
-
-void relatorioFuncionarios() {
-    printf("Exibindo relatório de funcionários...\n");
-    
-}
-
 int main() {
-    int opcao;
+    int opcao = -1;
     
-    do {
-        
-        printf("\n--- Menu de Relatórios ---\n");
-        printf("1. Relatório de Vendas\n");
-        printf("2. Relatório de Estoque\n");
-        printf("3. Relatório de Clientes\n");
-        printf("4. Relatório de Funcionários\n");
+    while (opcao != 0) {
+        printf("Menu:\n");
+        printf("1. Menu de Vendas\n");
+        printf("2. Menu de Estoque\n");
+        printf("3. Menu de Clientes\n");
+        printf("4. Menu de Funcionarios\n");
         printf("0. Sair\n");
-        printf("Escolha uma opção: ");
+        printf("Digite o numero: ");
         scanf("%d", &opcao);
 
-        
-        switch(opcao) {
-            case 1:
-                relatorioVendas();
-                break;
-            case 2:
-                relatorioEstoque();
-                break;
-            case 3:
-                relatorioClientes();
-                break;
-            case 4:
-                relatorioFuncionarios();
-                break;
-            case 0:
-                printf("Saindo do programa...\n");
-                break;
-            default:
-                printf("Opção inválida! Tente novamente.\n");
-        }
-    } while(opcao != 0);
+    if (opcao == 1) {
+        printf("Relatório de Vendas...\n");
+    } else if (opcao == 2) {
+        printf("Relatório de Estoque...\n");
+    } else if (opcao == 3) {
+        printf("Relatório de Clientes...\n");
+    } else if (opcao == 4) {
+        printf("Relatório de Funcionários...\n");
+    } else if (opcao == 0) {
+        printf("Saindo...\n");
+    } else {
+        printf ("Invalido!\n");
+    }
+}
 
-    return 0;
+return 0;
 }
