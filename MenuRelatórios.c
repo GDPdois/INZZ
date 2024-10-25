@@ -10,10 +10,8 @@ int main()
     while (opcao != 0)
     {
         printf("Menu:\n");
-        printf("1. Menu de Vendas\n");
-        printf("2. Menu de Estoque\n");
-        printf("3. Menu de Clientes\n");
-        printf("4. Menu de Funcionarios\n");
+        printf("1. Relatório de Vendas\n");
+        printf("2. Relatório de Estoque\n");
         printf("0. Sair\n");
         printf("Digite o numero: ");
         scanf("%d", &opcao);
