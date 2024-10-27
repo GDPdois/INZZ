@@ -1,4 +1,4 @@
-//Sprint 11/09 Interface Frontend (Nicolas)
+//Sprint 11/09 Interface Frontend (Nicolas) el bolona
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -271,4 +271,3 @@ int main() {
         }
     }
 }
-
