@@ -5,30 +5,27 @@ int main()
 {
 
     setlocale(LC_ALL, "");
-    int opcao = -1;
+    int opcao;
 
-    while (opcao != 0)
-    {
-        printf("Menu:\n");
-        printf("1. Relatório de Vendas\n");
-        printf("2. Relatório de Estoque\n");
-        printf("0. Sair\n");
-        printf("Digite o numero: ");
-        scanf("%d", &opcao);
+    printf ("1. Relatório de vendas \n");
+    printf ("2. Relatório de estoque \n");
+    printf ("0. Sair \n");
+    printf ("Qual deles deseja acessar? \n");
+    scanf ("%i", &opcao);
 
-        if (opcao == 1)
-        {
-            printf("Relatório de Vendas...\n"); // Aqui vai uma função de relatorio de vendas
-        }
-        else if (opcao == 2)
-        {
-            printf("Relatório de Estoque...\n"); // Aqui vai uma função de relatório de estoque
-        }
-        else
-        {
-            printf("Opção Inválida!\n");
-        }
+    switch (opcao) {
+
+        case 1:
+            printf("Relatório de vendas \n"); //Função relatório vai entrar aqui.
+        break;
+
+        case 2:
+            printf("Relatório de estoque \n"); //Função relatório vai entrar aqui.
+        break;
+
+        case 0:
+            printf ("Saindo do menu relatórios");
+            exit(0);
+        break;
     }
-
-    return 0;
 }
