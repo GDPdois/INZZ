@@ -85,6 +85,7 @@ void adicionar_produto() {
     salvar_estoque();
 
     printf("Produto %s adicionado com sucesso!\n", novo_produto.nome);
+    printf("O ID deste produto é %d", novo_produto.id);
 }
 
 // Função para editar a quantidade de um produto existente
