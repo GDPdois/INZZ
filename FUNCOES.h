@@ -1,14 +1,19 @@
 
 // ARQUIVO DE FUNÇÕES
 
-// LIMPA TELA (limpa a tela)
+// FUNÇÕES NO ARQUIVO:
+// somaProdutos()
+// descontoTotal()
+// descontoProduto()
+// exibeProdutos()
+// limpaTela()
 
+// LIMPA TELA (limpa a tela)
 void limpaTela(){
     system("cls");
 }
 
 // EXIBE PRODUTOS (exibe os produtos)
-
 void exibeProdutos(int i, float valorProdutos[], float total){
     for(int j = 0; j < i; j++){
         printf("\n\tProduto %d: R$ %.2f", j + 1, valorProdutos[j]);
@@ -20,9 +25,8 @@ void exibeProdutos(int i, float valorProdutos[], float total){
     printf("\n----------------------------------\n");
 }
 
-// MÓDULO CAIXA DESCONTO (calcula o desconto)
-
-float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
+// MÓDULO CAIXA DESCONTO (calcula o desconto total da compra)
+float descontoTotal(int i, float valorProdutos[], float totalSemDesc){
     float descontoPercentual, valorDesconto, valorFinal;
 
     do{
@@ -33,8 +37,8 @@ float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
         scanf("%f", &descontoPercentual);
 
         if(descontoPercentual < 0 || descontoPercentual > 100){
-            system("cls");
-            printf("***O valor do desconto deve estar entre 0 e 100!\n");
+            limpaTela();
+            printf("***O valor do desconto deve estar entre 1 e 100!\n");
             printf("\n-------------------------------------------------\n");
         }
     }
@@ -53,18 +57,52 @@ float moduloCaixaDesconto(int i, float valorProdutos[], float totalSemDesc){
     return valorFinal;
 }
 
-// SOMA PRODUTOS (soma os produtos)
+// DESCONTO PRODUTO (aplica desconto apenas no produto escolhido)
+float descontoProduto(float preco, float desconto){
+    return preco * (1 - desconto / 100);
+}
 
+// SOMA PRODUTOS (soma os produtos)
 float somaProdutos(){
-    float valorProdutos[100], total = 0;
+    float valorProdutos[100], total = 0, desconto;
     char op;
     int i = 0;
 
     do{
         exibeProdutos(i, valorProdutos, total);
-        
+
         printf("\nDigite o valor do %dº produto: R$ ", i+1);
         scanf("%f", &valorProdutos[i]);
+
+        printf("\nAplicar desconto no produto? (S/N)\n");
+        printf(" - Escolha: ");
+        fflush(stdin);
+        scanf("%c", &op);
+
+        op = tolower(op);
+
+        limpaTela();
+
+        if(op == 's') {
+            do{
+                exibeProdutos(i, valorProdutos, total);
+
+                printf("\nValor sem desconto: %.2f", valorProdutos[i]);
+                printf("\nDigite a porcentagem do desconto: ");
+                scanf("%f", &desconto);
+
+                if(desconto <= 0 || desconto > 100){
+                    limpaTela();
+                    printf("***O valor do desconto deve estar entre 1 e 100!\n");
+                    printf("\n-------------------------------------------------\n");
+                }
+            }
+            while(desconto <= 0 || desconto > 100);
+
+            valorProdutos[i] = descontoProduto(valorProdutos[i], desconto);
+        }
+
+        op = '\0'; // limpa a variavel pra usar de novo
 
         total += valorProdutos[i];
         i++;
@@ -84,7 +122,23 @@ float somaProdutos(){
     }
     while(op == 's' || op == '1');
 
-    total = moduloCaixaDesconto(i, valorProdutos, total);
+    op = '/0';
+
+    exibeProdutos(i, valorProdutos, total);
+
+    printf("\nAdicionar desconto ao valor total? (S/N)?");
+    printf("\n - Escolha: ");
+    fflush(stdin);
+    scanf("%c", &op);
+
+    limpaTela();
+
+    if(op == 's'){
+        total = descontoTotal(i, valorProdutos, total);
+    }
+    else{
+        exibeProdutos(i, valorProdutos, total);
+    }
 
     return total;
 }
