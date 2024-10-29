@@ -1,16 +1,106 @@
+// STRUCT CLIENTES
+#ifndef CLIENTES_H
+#define CLIENTES_H
 
-// ARQUIVO DE FUNÇÕES
+struct clientes {
+    char nome[50], cpf[12], cel[12];
+};
 
-// FUNÇÕES NO ARQUIVO:
-// somaProdutos()
-// descontoTotal()
-// descontoProduto()
-// exibeProdutos()
-// limpaTela()
+typedef struct clientes clientes;
+
+#endif
+
+// FUNÇÕES
+
+/* FUNÇÕES NO ARQUIVO:
+    somaProdutos()
+    descontoTotal()
+    descontoProduto()
+    exibeProdutos()
+    limpaTela()
+*/
 
 // LIMPA TELA (limpa a tela)
 void limpaTela(){
     system("cls");
+}
+
+// VARIÁVEIS GLOBAIS (?)
+
+
+// CADASTRO DE CLIENTES (cadastra os clientes)
+void cadCliente(){
+    int qtd = 0;
+    int *pQtd = &qtd;
+    clientes *lista = NULL;
+
+    char continuar;
+
+    //---CADASTRO CLIENTES---
+    do{
+        lista = realloc(lista, (qtd + 1) * sizeof(clientes));
+
+        if (lista == NULL) {
+            printf("Erro ao alocar memória!\n");
+            //return 1;
+            exit(0);
+        }
+
+        printf("\n\t - Cadastro de Clientes -\n");
+
+        printf("\nNome completo: ");
+        scanf(" %49[^\n]s", &lista[qtd].nome);
+        fflush(stdin);
+
+        printf("\nCPF(apenas números): ");
+        scanf("%11s", &lista[qtd].cpf);
+        fflush(stdin);
+
+        printf("\nCelular com DDD(apenas números): ");
+        scanf("%11s", &lista[qtd].cel);
+        fflush(stdin);
+
+        //fprintf(arquivo, "Cliente %d\nNome: %s - CPF: %s - Celular: %s\n\n",
+                //qtd + 1, lista[qtd].nome, lista[qtd].cpf, lista[qtd].cel);
+
+        qtd++;
+
+        printf("\n\tCliente cadastrado com sucesso!");
+
+        printf("\n\nDeseja cadastrar outro cliente? (S/N)");
+        printf("\nResposta: ");
+        scanf(" %c", &continuar);
+
+        continuar = tolower(continuar);
+
+        if(continuar == 's'){
+            limpaTela();
+        }
+    }
+    while(continuar == 's');
+
+    /*for(int i = 0; i < qtd; i++){
+        printf("\n--------------- Cliente %d ---------------\n\n", i+1);
+        printf("\t   Nome: %s\n", lista[i].nome);
+        printf("\t    CPF: %.3s.%.3s.%.3s-%.2s\n", lista[i].cpf, lista[i].cpf+3, lista[i].cpf+6, lista[i].cpf+9);
+        printf("\tCelular: (%.2s) %.1s%.4s-%.4s\n", lista[i].cel, lista[i].cel+2, lista[i].cel+3, lista[i].cel+7);
+    }
+    printf("\n-----------------------------------------\n");
+    free(lista);*/
+
+    //fclose(arquivo);
+}
+
+// EXIBE CLIENTES (exibe os clientes)
+void exibeCliente(int *qtd, clientes *lista){
+    for(int i = 0; i < qtd; i++){
+        printf("\n--------------- Cliente %d ---------------\n\n", i+1);
+        printf("\t   Nome: %s\n", lista[i].nome);
+        printf("\t    CPF: %.3s.%.3s.%.3s-%.2s\n", lista[i].cpf, lista[i].cpf+3, lista[i].cpf+6, lista[i].cpf+9);
+        printf("\tCelular: (%.2s) %.1s%.4s-%.4s\n", lista[i].cel, lista[i].cel+2, lista[i].cel+3, lista[i].cel+7);
+    }
+    printf("\n-----------------------------------------\n");
+    free(lista);
 }
 
 // EXIBE PRODUTOS (exibe os produtos)
