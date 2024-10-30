@@ -17,6 +17,7 @@ int qtd = 0;
 // FUNÇÕES
 
 /* FUNÇÕES NO ARQUIVO:
+    menuPrincipal()
     cadCliente()
     exibeCliente()
     somaProdutos()
@@ -29,6 +30,46 @@ int qtd = 0;
 // LIMPA TELA (limpa a tela)
 void limpaTela(){
     system("cls");
+}
+
+// MENU PRINCIPAL
+void menuPrincipal(){
+    char op = '1';
+
+    do{
+        printf("\n\n\t - Menu Principal -\n\n");
+        printf("  1. Registrar\n");
+        printf("  2. Login\n");
+        printf("  3. Sair\n");
+        printf("\n  - Escolha: ");
+        scanf(" %c", &op);
+
+        switch(op){
+            case '1':
+                limpaTela();
+                registrar_usuario();
+            break;
+
+            case '2':
+                limpaTela();
+                login_usuario();
+            break;
+
+            case '3':
+                limpaTela();
+                printf("\n\nPrograma encerrado\n\n\n");
+                exit(0);
+            break;
+
+            default:
+                limpaTela();
+                printf("Opção inválida! Aperte qualquer tecla para tentar novamente");
+                getch();
+                limpaTela();
+            break;
+        }
+    }
+    while(op < '1' || op > '3');
 }
 
 // CADASTRO DE CLIENTES (cadastra os clientes)
@@ -218,4 +259,3 @@ float somaProdutos(){
 
     return total;
 }
-
