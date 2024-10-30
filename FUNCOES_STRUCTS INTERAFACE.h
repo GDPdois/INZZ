@@ -1,4 +1,4 @@
-
+#include <C:\Users\atumo\OneDrive\Documentos\PROG\PIM esse\funcoes.h>
 /// STRUCT INTERFACE (EL BOLA)
 #ifndef TIPOS_H
 #define TIPOS_H
@@ -29,6 +29,8 @@ Produto lista_produtos[MAX_PRODUTOS];
 int total_usuarios = 0;
 int total_produtos = 0;
 
+
+
 /// Funçoes Interface
 
 int verificar_usuario_existente(const char *nome_usuario) {
@@ -43,11 +45,15 @@ int verificar_usuario_existente(const char *nome_usuario) {
 
 void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
     if (verificar_usuario_existente(nome_usuario)) {
+        limpaTela();
+
         printf("\nErro: Nome de usuário já existe. Tente outro.\n");
         return;
     }
 
     if (total_usuarios >= MAX_USUARIOS) {
+        limpaTela();
+
         printf("\nNúmero máximo de usuários atingido.\n");
         return;
     }
@@ -57,6 +63,9 @@ void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
     strncpy(lista_usuarios[total_usuarios].senha_usuario, senha_usuario, TAMANHO_SENHA - 1);
     lista_usuarios[total_usuarios].senha_usuario[TAMANHO_SENHA - 1] = '\0';
     total_usuarios++;
+
+    limpaTela();
+
     printf("\nUsuário registrado com sucesso!\n");
 }
 
@@ -73,6 +82,7 @@ int autenticar(const char *nome_usuario, const char *senha_usuario) {
 
 
 void listar_produtos() {
+    limpaTela();
     printf("\n--- Lista de Produtos ---\n");
     if (total_produtos == 0) {
         printf("Nenhum produto no estoque.\n");
@@ -83,7 +93,7 @@ void listar_produtos() {
         float preco = lista_produtos[i].preco_produto;
         int inteiro = (int)preco;
         int centavos = (int)((preco - inteiro) * 100);
-        printf("Produto: %s | Quantidade: %d | Preço: %d,%02d\n",
+        printf("Produto: %s | Quantidade: %d | Preço: R$ %d,%02d\n",
                lista_produtos[i].nome_produto, lista_produtos[i].quantidade_produto, inteiro, centavos);
     }
 }
@@ -134,11 +144,14 @@ void adicionar_produto() {
     lista_produtos[total_produtos].preco_produto = preco_produto;
     total_produtos++;
 
+    limpaTela();
+
     printf("\nProduto adicionado com sucesso!\n");
 }
 
 
 void remover_produto() {
+    listar_produtos();
     char nome_produto[TAMANHO_NOME_PRODUTO];
 
     printf("\n--- Remover Produto ---\n");
@@ -151,10 +164,15 @@ void remover_produto() {
                 lista_produtos[j] = lista_produtos[j + 1];
             }
             total_produtos--;
+
+            limpaTela();
+
             printf("\nProduto removido com sucesso!\n");
             return;
         }
     }
+    limpaTela();
+
     printf("\nProduto não encontrado.\n");
 }
 
@@ -165,8 +183,10 @@ int obter_opcao_menu() {
         printf("Escolha uma opção: ");
         if (scanf("%d", &opcao) == 1) {
             limpar_buffer();
+            limpaTela();
             return opcao;
         } else {
+            limpaTela();
             printf("Entrada inválida! Tente novamente.\n");
             limpar_buffer();
         }
@@ -187,17 +207,21 @@ void menu_estoque() {
 
         switch (opcao) {
             case 1:
+                limpaTela();
                 adicionar_produto();
                 break;
             case 2:
+                limpaTela();
                 listar_produtos();
                 break;
             case 3:
+                limpaTela();
                 remover_produto();
                 break;
             case 4:
                 return;
             default:
+                limpaTela();
                 printf("\nOpção inválida! Tente novamente.\n");
         }
     }
@@ -229,9 +253,11 @@ void login_usuario() {
     scanf(" %[^\n]", senha_usuario);
 
     if (autenticar(nome_usuario, senha_usuario)) {
+        limpaTela();
         printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", nome_usuario);
         menu_estoque();
     } else {
+        limpaTela();
         printf("\nNome de usuário ou senha incorretos.\n");
     }
 }
