@@ -1,5 +1,0 @@
-Bibliotecas úteis:
-https://www.ufsm.br/pet/sistemas-de-informacao/2020/03/10/melhorando-suas-aplicacoes-em-c
-
-Menu interativo em C:
-https://www.youtube.com/watch?v=y-_-wq08i3E
