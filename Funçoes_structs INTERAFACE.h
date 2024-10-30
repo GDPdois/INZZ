@@ -1,9 +1,13 @@
-/
+
 /// STRUCT INTERFACE (EL BOLA)
+#ifndef TIPOS_H
+#define TIPOS_H
 
 #define TAMANHO_NOME_USUARIO 20
 #define TAMANHO_SENHA 20
 #define TAMANHO_NOME_PRODUTO 50
+#define MAX_USUARIOS 10
+#define MAX_PRODUTOS 50
 
 typedef struct {
     char nome_usuario[TAMANHO_NOME_USUARIO];
@@ -15,6 +19,15 @@ typedef struct {
     int quantidade_produto;
     float preco_produto;
 } Produto;
+
+#endif
+
+// VARIÁVEIS GLOBAIS
+
+Usuario lista_usuarios[MAX_USUARIOS];
+Produto lista_produtos[MAX_PRODUTOS];
+int total_usuarios = 0;
+int total_produtos = 0;
 
 /// Funçoes Interface
 
