@@ -1,4 +1,4 @@
-#include <C:\Users\atumo\OneDrive\Documentos\PROG\PIM esse\funcoes.h>
+#include <C:\Users\atumo\OneDrive\Documentos\PROG\PIM esse\funcoes.h> // tá assim pq eu tava testando no meu pc, só mudar o caminho depois
 /// STRUCT INTERFACE (EL BOLA)
 #ifndef TIPOS_H
 #define TIPOS_H
