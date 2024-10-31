@@ -69,7 +69,7 @@ void menuPrincipal(){
             break;
         }
     }
-    while(op < '1' || op > '3');
+    while('1');
 }
 
 // CADASTRO DE CLIENTES (cadastra os clientes)
