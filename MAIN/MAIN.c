@@ -6,16 +6,18 @@
 #include <locale.h>
 
 #include "funcoes.h"
-#include "funcoesStructsInterfaceGeral.h"
+#include "fncStrctsGeral.h"
 
 int main(){
     setlocale(LC_ALL, "");
 
     tela_boas_vindas();
-    Sleep(2000);
+    Sleep(1000);
     limpaTela();
 
-    menuPrincipal();
+    telaInicial();
 
     return 0;
 }
+
+
