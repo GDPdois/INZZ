@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "estoque": "cpp"
+        "estoque": "cpp",
+        "string.h": "c"
     }
 }
