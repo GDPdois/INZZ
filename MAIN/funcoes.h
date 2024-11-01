@@ -17,9 +17,14 @@ int qtd = 0;
 // FUNÇÕES
 
 /* FUNÇÕES NO ARQUIVO:
-    cadCliente()
-    exibeCliente()
+    cadClientes()
+    exibeClientes()
+    menuAdm()
+    menuGeral()
     telaCaixa()
+    telaClientes()
+    telaInicial()
+    telaUsuarios()
     descontoTotal()
     descontoProduto()
     exibeProdutos()
@@ -121,6 +126,38 @@ float telaCaixa(){
     return total;
 }
 
+void sair(){
+    int op;
+
+    do{
+        printf("\n\nTem certeza que deseja encerrar o programa?\n");
+        printf("\n  1. Sim\n  2. Não\n");
+        printf("\n  - Escolha: ");
+        fflush(stdin);
+        scanf("%d", &op);
+
+        switch(op){
+            case 1:
+                limpaTela();
+                printf("\n\nPrograma encerrado\n\n\n\n\n");
+                exit(0);
+            break;
+
+            case 2:
+                limpaTela();
+                return;
+            break;
+
+            default:
+                printf("\n\nOpção inválida! Aperte qualquer tecla para tentar novamente");
+                getch();
+                limpaTela();
+            break;
+        }
+    }
+    while(op != 1 && op != 2);
+}
+
 // MENU ADM
 
 void menuAdm(){
@@ -172,8 +209,7 @@ void menuAdm(){
 
             case 0:
                 limpaTela();
-                printf("\n\nPrograma encerrado\n\n\n");
-                exit(0);
+                sair();
             break;
 
             default:
@@ -226,6 +262,8 @@ void telaUsuarios(){
 
 // MENU PRINCIPAL
 void telaInicial(){
+    incluirAdm();
+
     int op;
 
     while(1){
@@ -304,7 +342,7 @@ void cadClientes(clientes **lista, int *qtd) {
 // EXIBE CLIENTES (exibe os clientes)
 // chamada: exibeClientes(lista, qtd);
 void exibeClientes(const clientes *lista, int qtd) {
-    printf("\n\t --- Clientes ---\n");
+    printf("\n\t    --- Clientes ---\n");
 
     if(qtd <= 0){
         printf("\nNenhum cliente cadastrado\n");
@@ -318,10 +356,69 @@ void exibeClientes(const clientes *lista, int qtd) {
     }
     printf("\n-----------------------------------------\n");
 
-    printf("Aperte qualquer tecla para voltar");
+    printf("\n  Aperte qualquer tecla para voltar");
     getch();
     limpaTela();
 }
+
+void removerClientes(clientes **lista, int *qtd) {
+    int num, op;
+
+    if(*qtd == 0) {
+        printf("\n\t    --- Clientes ---\n");
+        printf("\nNenhum cliente cadastrado\n");
+        printf("\nAperte qualquer tecla para voltar.\n");
+        getch();
+        limpaTela();
+        return;
+    }
+
+    printf("\n\t --- Clientes ---\n");
+
+    for (int i = 0; i < *qtd; i++) {
+        printf("\n  - Cliente %d: %s\n", i + 1, (*lista)[i].nome);
+    }
+
+    printf("\nDigite o número do cliente que deseja remover: ");
+    scanf("%d", &num);
+
+    if (num < 1 || num > *qtd) {
+        printf("\nCliente não existente\n");
+        printf("\nAperte qualquer tecla para voltar.\n");
+        getch();
+        limpaTela();
+        return;
+    }
+
+    printf("\nCliente %s será removido\n\nDeseja continuar?\n", (*lista)[num - 1].nome);
+    printf("\n  1. Sim\n  2. Não\n\n");
+    printf("  - Escolha: ");
+    scanf("%d", &op);
+
+    if(op == 2){
+        limpaTela();
+        return;
+    }
+
+    for(int i = num - 1; i < *qtd - 1; i++) {
+        (*lista)[i] = (*lista)[i + 1];
+    }
+
+    *qtd -= 1;
+    *lista = realloc(*lista, (*qtd) * sizeof(clientes));
+
+    if (*lista == NULL && *qtd > 0) {
+        printf("Erro ao alocar memória após a remoção!\n");
+        exit(1);
+    }
+
+    limpaTela();
+    printf("\nCliente removido!\n");
+    printf("\nAperte qualquer tecla para voltar.\n");
+    getch();
+    limpaTela();
+}
+
 
 void telaClientes(){
     int op;
@@ -329,7 +426,8 @@ void telaClientes(){
     while(1){
         printf("\n\n\t --- Clientes ---\n\n");
         printf("  1. Cadastrar Clientes\n");
-        printf("  2. Exibir Clientes\n\n");
+        printf("  2. Exibir Clientes\n");
+        printf("  3. Remover Clientes\n\n");
         printf("  0. Voltar\n");
         printf("\n  - Escolha: ");
         fflush(stdin);
@@ -344,6 +442,11 @@ void telaClientes(){
             case 2:
                 limpaTela();
                 exibeClientes(lista, qtd);
+            break;
+
+            case 3:
+                limpaTela();
+                removerClientes(&lista, &qtd);
             break;
 
             case 0:
@@ -374,7 +477,7 @@ void exibeProdutos(int i, float valorProdutos[], float total){
 
 // MÓDULO CAIXA DESCONTO (calcula o desconto total da compra)
 
-void menuNormal(){
+void menuGeral(){
     int op;
 
     while(1){
@@ -417,8 +520,7 @@ void menuNormal(){
 
             case 0:
                 limpaTela();
-                printf("\n\nPrograma encerrado\n\n\n");
-                exit(0);
+                sair();
             break;
 
             default:
@@ -429,8 +531,5 @@ void menuNormal(){
         }
     }
 }
-
-// SOMA PRODUTOS (soma os produtos)
-
 
 
