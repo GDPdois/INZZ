@@ -1,5 +1,24 @@
 
-/// ---------- STRUCTS ----------
+// FUNÇÕES NO ARQUIVO
+
+/*
+    adicionar_produto()
+    adicionar_usuario(const char* nome_usuario, const char* senha_usuario)
+    autenticar(const char* nome_usuario, const char* senha_usuario)
+    limpar_buffer()
+    listar_produtos()
+    listarUsuarios()
+    login_usuario()
+    obter_opcao_menu()
+    registrar_usuario()
+    remover_produto()
+    substituir_virgula_por_ponto(char* string)
+    tela_boas_vindas()
+    telaProdutos()
+    verificar_usuario_existente()
+*/
+
+/// ---------- MACROS ----------
 
 #define USER_ADM "adm"
 #define SENHA_ADM "123"
@@ -13,6 +32,8 @@
 #define TAMANHO_NOME_PRODUTO 50
 #define MAX_USUARIOS 10
 #define MAX_PRODUTOS 50
+
+/// ---------- STRUCTS ----------
 
 typedef struct {
     char nome_usuario[TAMANHO_NOME_USUARIO];
@@ -33,6 +54,7 @@ Usuario lista_usuarios[MAX_USUARIOS];
 Produto lista_produtos[MAX_PRODUTOS];
 int total_usuarios = 0;
 int total_produtos = 0;
+
 
 
 /// ---------- FUNCOES PRODUTOS ----------
@@ -157,7 +179,7 @@ int obter_opcao_menu() {
 void telaProdutos() {
     int opcao;
 
-    while (1) {
+    while(1){
         printf("\n\n\t --- Produtos ---\n\n");
         printf("1. Adicionar Produto\n");
         printf("2. Listar Produtos\n");
@@ -193,6 +215,14 @@ void telaProdutos() {
 
 // ---------- FUNCOES USUARIO ----------
 
+void incluirAdm(){
+    strcpy(lista_usuarios[0].nome_usuario, USER_ADM);
+    strcpy(lista_usuarios[0].senha_usuario, SENHA_ADM);
+
+    total_usuarios++;
+}
+
+
 void registrar_usuario() {
     char nome_usuario[TAMANHO_NOME_USUARIO];
     char senha_usuario[TAMANHO_SENHA];
@@ -217,11 +247,10 @@ int verificar_usuario_existente(const char *nome_usuario) {
 
 void listarUsuarios(){
     printf("\n\n\t --- Usuários ---\n\n");
-    printf("Total de usuários cadastrados: %d\n", total_usuarios + 1);
-    printf("\n1 - ADM\n");
+    printf("Total de usuários cadastrados: %d\n\n", total_usuarios);
 
     for(int i = 0; i < total_usuarios; i++){
-        printf("%d - %s\n", i + 2, lista_usuarios[i].nome_usuario);
+        printf("%d - %s\n", i + 1, lista_usuarios[i].nome_usuario);
     }
 
     printf("\n\nAperte qualquer tecla para voltar");
@@ -289,7 +318,7 @@ void login_usuario() {
     if (autenticar(nome_usuario, senha_usuario)) {
         limpaTela();
         printf("Login bem-sucedido! Bem-vindo(a), %s!", nome_usuario);
-        menuNormal();
+        menuGeral();
     } else {
         printf("\nNome de usuário ou senha incorretos.\n");
         printf("\n\nAperte qualquer tecla para voltar");
