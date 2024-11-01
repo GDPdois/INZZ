@@ -29,6 +29,7 @@ int qtd = 0;
     descontoProduto()
     exibeProdutos()
     limpaTela()
+    sair()
 */
 
 // LIMPA TELA (limpa a tela)
