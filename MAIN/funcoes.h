@@ -362,65 +362,6 @@ void exibeClientes(const clientes *lista, int qtd) {
     limpaTela();
 }
 
-void removerClientes(clientes **lista, int *qtd) {
-    int num, op;
-
-    if(*qtd == 0) {
-        printf("\n\t    --- Clientes ---\n");
-        printf("\nNenhum cliente cadastrado\n");
-        printf("\nAperte qualquer tecla para voltar.\n");
-        getch();
-        limpaTela();
-        return;
-    }
-
-    printf("\n\t --- Clientes ---\n");
-
-    for (int i = 0; i < *qtd; i++) {
-        printf("\n  - Cliente %d: %s\n", i + 1, (*lista)[i].nome);
-    }
-
-    printf("\nDigite o número do cliente que deseja remover: ");
-    scanf("%d", &num);
-
-    if (num < 1 || num > *qtd) {
-        printf("\nCliente não existente\n");
-        printf("\nAperte qualquer tecla para voltar.\n");
-        getch();
-        limpaTela();
-        return;
-    }
-
-    printf("\nCliente %s será removido\n\nDeseja continuar?\n", (*lista)[num - 1].nome);
-    printf("\n  1. Sim\n  2. Não\n\n");
-    printf("  - Escolha: ");
-    scanf("%d", &op);
-
-    if(op == 2){
-        limpaTela();
-        return;
-    }
-
-    for(int i = num - 1; i < *qtd - 1; i++) {
-        (*lista)[i] = (*lista)[i + 1];
-    }
-
-    *qtd -= 1;
-    *lista = realloc(*lista, (*qtd) * sizeof(clientes));
-
-    if (*lista == NULL && *qtd > 0) {
-        printf("Erro ao alocar memória após a remoção!\n");
-        exit(1);
-    }
-
-    limpaTela();
-    printf("\nCliente removido!\n");
-    printf("\nAperte qualquer tecla para voltar.\n");
-    getch();
-    limpaTela();
-}
-
-
 void telaClientes(){
     int op;
 
@@ -428,7 +369,6 @@ void telaClientes(){
         printf("\n\n\t --- Clientes ---\n\n");
         printf("  1. Cadastrar Clientes\n");
         printf("  2. Exibir Clientes\n");
-        printf("  3. Remover Clientes\n\n");
         printf("  0. Voltar\n");
         printf("\n  - Escolha: ");
         fflush(stdin);
@@ -443,11 +383,6 @@ void telaClientes(){
             case 2:
                 limpaTela();
                 exibeClientes(lista, qtd);
-            break;
-
-            case 3:
-                limpaTela();
-                removerClientes(&lista, &qtd);
             break;
 
             case 0:
