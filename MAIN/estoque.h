@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <locale.h>
-
 #define MaxProdutos 100
 #define TamanhoNome 50
 
@@ -181,34 +176,41 @@ void FuncaoEstoque()
     int opcao;
     do
     {
-        printf("\n=== Sistema de Controle de Estoque ===\n");
-        printf("1. Adicionar produto\n");
-        printf("2. Editar quantidade do produto\n");
-        printf("3. Listar produtos\n");
-        printf("4. Remover produto\n");
-        printf("5. Sair\n");
+        printf("\n=== Sistema de Controle de Estoque ===\n\n");
+        printf("  1. Adicionar produto\n");
+        printf("  2. Editar quantidade do produto\n");
+        printf("  3. Listar produtos\n");
+        printf("  4. Remover produto\n\n");
+        printf("  0. Voltar\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
         switch (opcao)
         {
         case 1:
+            limpaTela();
             adicionar_produto();
             break;
         case 2:
+            limpaTela();
             editar_quantidade();
             break;
         case 3:
+            limpaTela();
             listar_produtos();
             break;
         case 4:
+            limpaTela();
             remover_produto();
             break;
-        case 5:
-            printf("Saindo...\n");
+        case 0:
+            limpaTela();
+            return;
             break;
         default:
-            printf("Opção inválida! Tente novamente.\n");
+            limpaTela();
+            printf("Opção inválida! Aperte qualquer tecla para tentar novamente.\n");
+            getch();
         }
     } while (opcao != 5);
 }
