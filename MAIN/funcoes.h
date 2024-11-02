@@ -200,7 +200,7 @@ void menuAdm(){
 
             case 5:
                 limpaTela();
-                //estoque();
+                FuncaoEstoque();
             break;
 
             case 6:
