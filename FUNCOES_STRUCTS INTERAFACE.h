@@ -1,108 +1,98 @@
 #include <C:\Users\atumo\OneDrive\Documentos\PROG\PIM esse\funcoes.h> // tá assim pq eu tava testando no meu pc, só mudar o caminho depois
 /// STRUCT INTERFACE (EL BOLA)
-#ifndef TIPOS_H
+#define TIPOS_H
 #define TIPOS_H
 
-#define TAMANHO_NOME_USUARIO 20
-#define TAMANHO_SENHA 20
-#define TAMANHO_NOME_PRODUTO 50
-#define MAX_USUARIOS 10
-#define MAX_PRODUTOS 50
+#define TAMANHO_NOME_FUNCIONARIO 20
+#define TAMANHO_SENHA_FUNCIONARIO 20
+#define TAMANHO_NOME_ITEM 50
+#define MAX_FUNCIONARIOS 10
+#define MAX_ITENS 50
 
 typedef struct {
-    char nome_usuario[TAMANHO_NOME_USUARIO];
-    char senha_usuario[TAMANHO_SENHA];
-} Usuario;
+    char nome_funcionario[TAMANHO_NOME_FUNCIONARIO];
+    char senha_funcionario[TAMANHO_SENHA_FUNCIONARIO];
+} Funcionario;
 
 typedef struct {
-    char nome_produto[TAMANHO_NOME_PRODUTO];
-    int quantidade_produto;
-    float preco_produto;
-} Produto;
+    char nome_item[TAMANHO_NOME_ITEM];
+    int quantidade_item;
+    float preco_item;
+} Item;
 
 #endif
 
 // VARIÁVEIS GLOBAIS
 
-Usuario lista_usuarios[MAX_USUARIOS];
-Produto lista_produtos[MAX_PRODUTOS];
-int total_usuarios = 0;
-int total_produtos = 0;
+Funcionario lista_funcionarios[MAX_FUNCIONARIOS];
+Item lista_itens[MAX_ITENS];
+int total_funcionarios = 0;
+int total_itens = 0;
 
+/// Funções Interface
 
-
-/// Funçoes Interface
-
-int verificar_usuario_existente(const char *nome_usuario) {
-    for (int i = 0; i < total_usuarios; i++) {
-        if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0) {
+int verificar_funcionario_existente(const char *nome_funcionario) {
+    for (int i = 0; i < total_funcionarios; i++) {
+        if (strcmp(lista_funcionarios[i].nome_funcionario, nome_funcionario) == 0) {
             return 1;
         }
     }
     return 0;
 }
 
-
-void adicionar_usuario(const char *nome_usuario, const char *senha_usuario) {
-    if (verificar_usuario_existente(nome_usuario)) {
+void adicionar_funcionario(const char *nome_funcionario, const char *senha_funcionario) {
+    if (verificar_funcionario_existente(nome_funcionario)) {
         limpaTela();
-
         printf("\nErro: Nome de usuário já existe. Tente outro.\n");
         return;
     }
 
-    if (total_usuarios >= MAX_USUARIOS) {
+    if (total_funcionarios >= MAX_FUNCIONARIOS) {
         limpaTela();
-
         printf("\nNúmero máximo de usuários atingido.\n");
         return;
     }
 
-    strncpy(lista_usuarios[total_usuarios].nome_usuario, nome_usuario, TAMANHO_NOME_USUARIO - 1);
-    lista_usuarios[total_usuarios].nome_usuario[TAMANHO_NOME_USUARIO - 1] = '\0';
-    strncpy(lista_usuarios[total_usuarios].senha_usuario, senha_usuario, TAMANHO_SENHA - 1);
-    lista_usuarios[total_usuarios].senha_usuario[TAMANHO_SENHA - 1] = '\0';
-    total_usuarios++;
+    strncpy(lista_funcionarios[total_funcionarios].nome_funcionario, nome_funcionario, TAMANHO_NOME_FUNCIONARIO - 1);
+    lista_funcionarios[total_funcionarios].nome_funcionario[TAMANHO_NOME_FUNCIONARIO - 1] = '\0';
+    strncpy(lista_funcionarios[total_funcionarios].senha_funcionario, senha_funcionario, TAMANHO_SENHA_FUNCIONARIO - 1);
+    lista_funcionarios[total_funcionarios].senha_funcionario[TAMANHO_SENHA_FUNCIONARIO - 1] = '\0';
+    total_funcionarios++;
 
     limpaTela();
-
     printf("\nUsuário registrado com sucesso!\n");
 }
 
-
-int autenticar(const char *nome_usuario, const char *senha_usuario) {
-    for (int i = 0; i < total_usuarios; i++) {
-        if (strcmp(lista_usuarios[i].nome_usuario, nome_usuario) == 0 &&
-            strcmp(lista_usuarios[i].senha_usuario, senha_usuario) == 0) {
+int autenticar(const char *nome_funcionario, const char *senha_funcionario) {
+    for (int i = 0; i < total_funcionarios; i++) {
+        if (strcmp(lista_funcionarios[i].nome_funcionario, nome_funcionario) == 0 &&
+            strcmp(lista_funcionarios[i].senha_funcionario, senha_funcionario) == 0) {
             return 1;
         }
     }
     return 0;
 }
 
-
-void listar_produtos() {
+void listar_itens() {
     limpaTela();
-    printf("\n--- Lista de Produtos ---\n");
-    if (total_produtos == 0) {
-        printf("Nenhum produto no estoque.\n");
+    printf("\n--- Lista de Itens ---\n");
+    if (total_itens == 0) {
+        printf("Nenhum item no estoque.\n");
         return;
     }
 
-    for (int i = 0; i < total_produtos; i++) {
-        float preco = lista_produtos[i].preco_produto;
+    for (int i = 0; i < total_itens; i++) {
+        float preco = lista_itens[i].preco_item;
         int inteiro = (int)preco;
         int centavos = (int)((preco - inteiro) * 100);
-        printf("Produto: %s | Quantidade: %d | Preço: R$ %d,%02d\n",
-               lista_produtos[i].nome_produto, lista_produtos[i].quantidade_produto, inteiro, centavos);
+        printf("Item: %s | Quantidade: %d | Preço: R$ %d,%02d\n",
+               lista_itens[i].nome_item, lista_itens[i].quantidade_item, inteiro, centavos);
     }
 }
-
 
 void limpar_buffer() {
     while (getchar() != '\n');
 }
-
 
 void substituir_virgula_por_ponto(char *string) {
     for (int i = 0; string[i] != '\0'; i++) {
@@ -112,70 +102,64 @@ void substituir_virgula_por_ponto(char *string) {
     }
 }
 
-
-void adicionar_produto() {
-    if (total_produtos >= MAX_PRODUTOS) {
-        printf("\nEstoque cheio! Não é possível adicionar mais produtos.\n");
+void adicionar_item() {
+    if (total_itens >= MAX_ITENS) {
+        printf("\nEstoque cheio! Não é possível adicionar mais itens.\n");
         return;
     }
 
-    char nome_produto[TAMANHO_NOME_PRODUTO];
-    int quantidade_produto;
+    char nome_item[TAMANHO_NOME_ITEM];
+    int quantidade_item;
     char preco_str[20];
-    float preco_produto;
+    float preco_item;
 
-    printf("\n--- Adicionar Produto ---\n");
-    printf("Nome do produto: ");
-    scanf(" %[^\n]", nome_produto);
+    printf("\n--- Adicionar Item ---\n");
+    printf("Nome do item: ");
+    scanf(" %[^\n]", nome_item);
 
     printf("Quantidade: ");
-    scanf("%d", &quantidade_produto);
+    scanf("%d", &quantidade_item);
 
     limpar_buffer();
 
     printf("Preço: ");
     scanf("%s", preco_str);
     substituir_virgula_por_ponto(preco_str);
-    preco_produto = atof(preco_str);
+    preco_item = atof(preco_str);
 
-    strncpy(lista_produtos[total_produtos].nome_produto, nome_produto, TAMANHO_NOME_PRODUTO - 1);
-    lista_produtos[total_produtos].nome_produto[TAMANHO_NOME_PRODUTO - 1] = '\0';  // Terminação nula
-    lista_produtos[total_produtos].quantidade_produto = quantidade_produto;
-    lista_produtos[total_produtos].preco_produto = preco_produto;
-    total_produtos++;
+    strncpy(lista_itens[total_itens].nome_item, nome_item, TAMANHO_NOME_ITEM - 1);
+    lista_itens[total_itens].nome_item[TAMANHO_NOME_ITEM - 1] = '\0';
+    lista_itens[total_itens].quantidade_item = quantidade_item;
+    lista_itens[total_itens].preco_item = preco_item;
+    total_itens++;
 
     limpaTela();
-
-    printf("\nProduto adicionado com sucesso!\n");
+    printf("\nItem adicionado com sucesso!\n");
 }
 
+void remover_item() {
+    listar_itens();
+    char nome_item[TAMANHO_NOME_ITEM];
 
-void remover_produto() {
-    listar_produtos();
-    char nome_produto[TAMANHO_NOME_PRODUTO];
+    printf("\n--- Remover Item ---\n");
+    printf("Nome do item: ");
+    scanf(" %[^\n]", nome_item);
 
-    printf("\n--- Remover Produto ---\n");
-    printf("Nome do produto: ");
-    scanf(" %[^\n]", nome_produto);
-
-    for (int i = 0; i < total_produtos; i++) {
-        if (strcmp(lista_produtos[i].nome_produto, nome_produto) == 0) {
-            for (int j = i; j < total_produtos - 1; j++) {
-                lista_produtos[j] = lista_produtos[j + 1];
+    for (int i = 0; i < total_itens; i++) {
+        if (strcmp(lista_itens[i].nome_item, nome_item) == 0) {
+            for (int j = i; j < total_itens - 1; j++) {
+                lista_itens[j] = lista_itens[j + 1];
             }
-            total_produtos--;
+            total_itens--;
 
             limpaTela();
-
-            printf("\nProduto removido com sucesso!\n");
+            printf("\nItem removido com sucesso!\n");
             return;
         }
     }
     limpaTela();
-
-    printf("\nProduto não encontrado.\n");
+    printf("\nItem não encontrado.\n");
 }
-
 
 int obter_opcao_menu() {
     int opcao;
@@ -193,14 +177,13 @@ int obter_opcao_menu() {
     }
 }
 
-
 void menu_estoque() {
     int opcao;
     while (1) {
         printf("\n--- Menu de Estoque ---\n");
-        printf("1. Adicionar Produto\n");
-        printf("2. Listar Produtos\n");
-        printf("3. Remover Produto\n");
+        printf("1. Adicionar Item\n");
+        printf("2. Listar Itens\n");
+        printf("3. Remover Item\n");
         printf("4. Voltar ao Menu Principal\n");
 
         opcao = obter_opcao_menu();
@@ -208,15 +191,15 @@ void menu_estoque() {
         switch (opcao) {
             case 1:
                 limpaTela();
-                adicionar_produto();
+                adicionar_item();
                 break;
             case 2:
                 limpaTela();
-                listar_produtos();
+                listar_itens();
                 break;
             case 3:
                 limpaTela();
-                remover_produto();
+                remover_item();
                 break;
             case 4:
                 return;
@@ -227,41 +210,38 @@ void menu_estoque() {
     }
 }
 
-
-void registrar_usuario() {
-    char nome_usuario[TAMANHO_NOME_USUARIO];
-    char senha_usuario[TAMANHO_SENHA];
+void registrar_funcionario() {
+    char nome_funcionario[TAMANHO_NOME_FUNCIONARIO];
+    char senha_funcionario[TAMANHO_SENHA_FUNCIONARIO];
 
     printf("\n--- Registro de Usuário ---\n");
     printf("Digite o nome de usuário: ");
-    scanf(" %[^\n]", nome_usuario);
+    scanf(" %[^\n]", nome_funcionario);
     printf("Digite a senha: ");
-    scanf(" %[^\n]", senha_usuario);
+    scanf(" %[^\n]", senha_funcionario);
 
-    adicionar_usuario(nome_usuario, senha_usuario);
+    adicionar_funcionario(nome_funcionario, senha_funcionario);
 }
 
-
-void login_usuario() {
-    char nome_usuario[TAMANHO_NOME_USUARIO];
-    char senha_usuario[TAMANHO_SENHA];
+void login_funcionario() {
+    char nome_funcionario[TAMANHO_NOME_FUNCIONARIO];
+    char senha_funcionario[TAMANHO_SENHA_FUNCIONARIO];
 
     printf("\n--- Login ---\n");
     printf("Nome de usuário: ");
-    scanf(" %[^\n]", nome_usuario);
+    scanf(" %[^\n]", nome_funcionario);
     printf("Senha: ");
-    scanf(" %[^\n]", senha_usuario);
+    scanf(" %[^\n]", senha_funcionario);
 
-    if (autenticar(nome_usuario, senha_usuario)) {
+    if (autenticar(nome_funcionario, senha_funcionario)) {
         limpaTela();
-        printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", nome_usuario);
+        printf("\nLogin bem-sucedido! Bem-vindo(a), %s!\n", nome_funcionario);
         menu_estoque();
     } else {
         limpaTela();
         printf("\nNome de usuário ou senha incorretos.\n");
     }
 }
-
 
 void tela_boas_vindas() {
     printf("\n");
@@ -271,4 +251,3 @@ void tela_boas_vindas() {
     printf("*                                      *\n");
     printf("****************************************\n");
 }
-
