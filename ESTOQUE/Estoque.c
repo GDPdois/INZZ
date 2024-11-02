@@ -6,7 +6,8 @@
 #define MaxProdutos 100
 #define TamanhoNome 50
 
-typedef struct {
+typedef struct
+{
     int id;
     char nome[TamanhoNome];
     int quantidade;
@@ -19,39 +20,52 @@ Produto estoque[MaxProdutos];
 int total_produtos = 0;
 
 // Função auxiliar para salvar todo o estoque no arquivo
-void salvar_estoque() {
+void salvar_estoque()
+{
     FILE *arquivo = fopen("estoque.txt", "w");
-    if (arquivo != NULL) {
-        for (int i = 0; i < total_produtos; i++) {
+    if (arquivo != NULL)
+    {
+        for (int i = 0; i < total_produtos; i++)
+        {
             fprintf(arquivo, "%d %s %d %.2f %.2f %.2f\n", estoque[i].id, estoque[i].nome, estoque[i].quantidade,
                     estoque[i].preco_compra, estoque[i].preco_venda, estoque[i].desconto);
         }
         fclose(arquivo);
-    } else {
+    }
+    else
+    {
         perror("Erro ao salvar o estoque");
     }
 }
 
 // Função auxiliar para carregar o estoque do arquivo
-void carregar_estoque() {
+void carregar_estoque()
+{
     FILE *arquivo = fopen("estoque.txt", "r");
-    if (arquivo != NULL) {
+    if (arquivo != NULL)
+    {
         total_produtos = 0;
         while (fscanf(arquivo, "%d %49[^\n] %d %f %f %f\n", &estoque[total_produtos].id, estoque[total_produtos].nome,
                       &estoque[total_produtos].quantidade, &estoque[total_produtos].preco_compra,
-                      &estoque[total_produtos].preco_venda, &estoque[total_produtos].desconto) == 6) {
+                      &estoque[total_produtos].preco_venda, &estoque[total_produtos].desconto) == 6)
+        {
             total_produtos++;
         }
         fclose(arquivo);
-    } else {
+    }
+    else
+    {
         perror("Erro ao carregar o estoque");
     }
 }
 
 // Função para buscar produto por ID
-int buscar_produto_por_id(int id) {
-    for (int i = 0; i < total_produtos; i++) {
-        if (estoque[i].id == id) {
+int buscar_produto_por_id(int id)
+{
+    for (int i = 0; i < total_produtos; i++)
+    {
+        if (estoque[i].id == id)
+        {
             return i;
         }
     }
@@ -59,8 +73,10 @@ int buscar_produto_por_id(int id) {
 }
 
 // Função para adicionar um novo produto
-void adicionar_produto() {
-    if (total_produtos >= MaxProdutos) {
+void adicionar_produto()
+{
+    if (total_produtos >= MaxProdutos)
+    {
         printf("Estoque cheio! Não é possível adicionar mais produtos.\n");
         return;
     }
@@ -89,13 +105,15 @@ void adicionar_produto() {
 }
 
 // Função para editar a quantidade de um produto existente
-void editar_quantidade() {
+void editar_quantidade()
+{
     int id;
     printf("Digite o ID do produto que deseja editar: ");
     scanf("%d", &id);
 
     int indice = buscar_produto_por_id(id);
-    if (indice != -1) {
+    if (indice != -1)
+    {
         printf("Produto encontrado: %s\n", estoque[indice].nome);
         printf("Quantidade atual: %d\n", estoque[indice].quantidade);
         printf("Digite a nova quantidade: ");
@@ -103,20 +121,27 @@ void editar_quantidade() {
 
         salvar_estoque();
         printf("Quantidade atualizada com sucesso!\n");
-    } else {
+    }
+    else
+    {
         printf("Produto com ID %d não encontrado.\n", id);
     }
 }
 
-
-void listar_produtos() {
-    if (total_produtos == 0) {
+void listar_produtos()
+{
+    if (total_produtos == 0)
+    {
         carregar_estoque();
     }
-    if (total_produtos == 0) {
+    if (total_produtos == 0)
+    {
         printf("Nenhum produto no estoque.\n");
-    } else {
-        for (int i = 0; i < total_produtos; i++) {
+    }
+    else
+    {
+        for (int i = 0; i < total_produtos; i++)
+        {
             printf("ID: %d\nNome: %s\nQuantidade: %d\nPreço de Compra: %.2f\nPreço de Venda: %.2f\nDesconto: %.2f%%\n\n",
                    estoque[i].id, estoque[i].nome, estoque[i].quantidade, estoque[i].preco_compra, estoque[i].preco_venda,
                    estoque[i].desconto);
@@ -124,31 +149,38 @@ void listar_produtos() {
     }
 }
 
-void remover_produto() {
+void remover_produto()
+{
     int id;
     printf("Digite o ID do produto que deseja remover: ");
     scanf("%d", &id);
 
     int indice = buscar_produto_por_id(id);
-    if (indice != -1) {
-        for (int i = indice; i < total_produtos - 1; i++) {
+    if (indice != -1)
+    {
+        for (int i = indice; i < total_produtos - 1; i++)
+        {
             estoque[i] = estoque[i + 1];
         }
         total_produtos--;
 
         salvar_estoque();
         printf("Produto removido com sucesso!\n");
-    } else {
+    }
+    else
+    {
         printf("Produto com ID %d não encontrado.\n", id);
     }
 }
 
-int main() {
+void FuncaoEstoque()
+{
     carregar_estoque();
     setlocale(LC_ALL, "");
 
     int opcao;
-    do {
+    do
+    {
         printf("\n=== Sistema de Controle de Estoque ===\n");
         printf("1. Adicionar produto\n");
         printf("2. Editar quantidade do produto\n");
@@ -158,26 +190,25 @@ int main() {
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
-        switch (opcao) {
-            case 1:
-                adicionar_produto();
-                break;
-            case 2:
-                editar_quantidade();
-                break;
-            case 3:
-                listar_produtos();
-                break;
-            case 4:
-                remover_produto();
-                break;
-            case 5:
-                printf("Saindo...\n");
-                break;
-            default:
-                printf("Opção inválida! Tente novamente.\n");
+        switch (opcao)
+        {
+        case 1:
+            adicionar_produto();
+            break;
+        case 2:
+            editar_quantidade();
+            break;
+        case 3:
+            listar_produtos();
+            break;
+        case 4:
+            remover_produto();
+            break;
+        case 5:
+            printf("Saindo...\n");
+            break;
+        default:
+            printf("Opção inválida! Tente novamente.\n");
         }
     } while (opcao != 5);
-
-    return 0;
 }
