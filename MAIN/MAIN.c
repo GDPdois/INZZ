@@ -7,7 +7,7 @@
 
 #include "funcoes.h"
 #include "fncStrctsGeral.h"
-#include "Estoque.c"
+#include "Estoque.h"
 
 int main(){
     setlocale(LC_ALL, "");
