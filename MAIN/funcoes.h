@@ -29,7 +29,6 @@ int qtd = 0;
     descontoProduto()
     exibeProdutos()
     limpaTela()
-    sair()
 */
 
 // LIMPA TELA (limpa a tela)
@@ -185,7 +184,7 @@ void menuAdm(){
 
             case 2:
                 limpaTela();
-                telaProdutos();
+                telaItens();
             break;
 
             case 3:
@@ -205,7 +204,7 @@ void menuAdm(){
 
             case 6:
                 limpaTela();
-                login_usuario();
+                login_funcionario();
             break;
 
             case 0:
@@ -239,12 +238,12 @@ void telaUsuarios(){
         switch(op){
             case 1:
                 limpaTela();
-                registrar_usuario();
+                registrar_funcionario();
             break;
 
             case 2:
                 limpaTela();
-                listarUsuarios();
+                listarFuncionarios();
             break;
 
             case 0:
@@ -278,7 +277,7 @@ void telaInicial(){
         switch(op){
             case 1:
                 limpaTela();
-                login_usuario();
+                login_funcionario();
             break;
 
             case 0:
@@ -431,7 +430,7 @@ void menuGeral(){
         switch(op){
             case 1:
                 limpaTela();
-                telaProdutos();
+                telaItens();
             break;
 
             case 2:
@@ -446,12 +445,12 @@ void menuGeral(){
 
             case 4:
                 limpaTela();
-                //estoque();
+                FuncaoEstoque();
             break;
 
             case 5:
                 limpaTela();
-                login_usuario();
+                login_funcionario();
             break;
 
             case 0:
@@ -467,5 +466,8 @@ void menuGeral(){
         }
     }
 }
+
+// SOMA PRODUTOS (soma os produtos)
+
 
 
