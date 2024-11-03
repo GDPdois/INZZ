@@ -73,21 +73,24 @@ void adicionar_produto()
     if (total_produtos >= MaxProdutos)
     {
         printf("Estoque cheio! Não é possível adicionar mais produtos.\n");
+        printf("\nAperte qualquer tecla para continuar");
+        getch();
+        limpaTela();
         return;
     }
 
     Produto novo_produto;
     novo_produto.id = (total_produtos == 0) ? 1 : estoque[total_produtos - 1].id + 1;
 
-    printf("Digite o nome do produto: ");
+    printf("\nDigite o nome do produto: ");
     scanf(" %49[^\n]", novo_produto.nome);
-    printf("Digite a quantidade em estoque: ");
+    printf("\nDigite a quantidade em estoque: ");
     scanf("%d", &novo_produto.quantidade);
-    printf("Digite o preço de compra: ");
+    printf("\nDigite o preço de compra: ");
     scanf("%f", &novo_produto.preco_compra);
-    printf("Digite o preço de venda: ");
+    printf("\nDigite o preço de venda: ");
     scanf("%f", &novo_produto.preco_venda);
-    printf("Digite a porcentagem de desconto: ");
+    printf("\nDigite a porcentagem de desconto: ");
     scanf("%f", &novo_produto.desconto);
 
     estoque[total_produtos] = novo_produto;
@@ -95,8 +98,13 @@ void adicionar_produto()
 
     salvar_estoque();
 
-    printf("Produto %s adicionado com sucesso!\n", novo_produto.nome);
-    printf("O ID deste produto é %d", novo_produto.id);
+    printf("\n--------------------------------------\n");
+    printf("\nProduto %s adicionado com sucesso!\n", novo_produto.nome);
+    printf("\nO ID deste produto é %d", novo_produto.id);
+
+    printf("\n\nAperte qualquer tecla para continuar");
+    getch();
+    limpaTela();
 }
 
 // Função para editar a quantidade de um produto existente
@@ -115,11 +123,15 @@ void editar_quantidade()
         scanf("%d", &estoque[indice].quantidade);
 
         salvar_estoque();
-        printf("Quantidade atualizada com sucesso!\n");
+        printf("Quantidade atualizada com sucesso! Aperte qualquer tecla para voltar\n");
+        getch();
+        limpaTela();
     }
     else
     {
-        printf("Produto com ID %d não encontrado.\n", id);
+        printf("\nProduto com ID %d não encontrado. Aperte qualquer tecla para voltar\n", id);
+        getch();
+        limpaTela();
     }
 }
 
@@ -131,7 +143,9 @@ void listar_produtos()
     }
     if (total_produtos == 0)
     {
-        printf("Nenhum produto no estoque.\n");
+        printf("\nNenhum produto no estoque. Aperte qualquer tecla para voltar\n");
+        getch();
+        limpaTela();
     }
     else
     {
@@ -140,14 +154,19 @@ void listar_produtos()
             printf("ID: %d\nNome: %s\nQuantidade: %d\nPreço de Compra: %.2f\nPreço de Venda: %.2f\nDesconto: %.2f%%\n\n",
                    estoque[i].id, estoque[i].nome, estoque[i].quantidade, estoque[i].preco_compra, estoque[i].preco_venda,
                    estoque[i].desconto);
+
+            printf("------------------------------------------\n\n");
         }
+        printf("Aperte qualquer tecla para voltar");
+        getch();
+        limpaTela();
     }
 }
 
 void remover_produto()
 {
     int id;
-    printf("Digite o ID do produto que deseja remover: ");
+    printf("\nDigite o ID do produto que deseja remover: ");
     scanf("%d", &id);
 
     int indice = buscar_produto_por_id(id);
@@ -160,11 +179,15 @@ void remover_produto()
         total_produtos--;
 
         salvar_estoque();
-        printf("Produto removido com sucesso!\n");
+        printf("\nProduto removido com sucesso! Aperte qualquer tecla para voltar\n");
+        getch();
+        limpaTela();
     }
     else
     {
-        printf("Produto com ID %d não encontrado.\n", id);
+        printf("\nProduto com ID %d não encontrado. Aperte qualquer tecla para voltar\n", id);
+        getch();
+        limpaTela();
     }
 }
 
@@ -181,8 +204,8 @@ void FuncaoEstoque()
         printf("  2. Editar quantidade do produto\n");
         printf("  3. Listar produtos\n");
         printf("  4. Remover produto\n\n");
-        printf("  0. Voltar\n");
-        printf("Escolha uma opção: ");
+        printf("  0. Voltar\n\n");
+        printf("  - Escolha: ");
         scanf("%d", &opcao);
 
         switch (opcao)
