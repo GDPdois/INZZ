@@ -1,4 +1,5 @@
-// STRUCT CLIENTES
+
+// ---------- STRUCT CLIENTES ----------
 #ifndef CLIENTES_H
 #define CLIENTES_H
 
@@ -10,32 +11,32 @@ typedef struct clientes clientes;
 
 #endif
 
-// VARIÁVEIS GLOBAIS
+// ---------- VARIÁVEIS GLOBAIS -----------
 clientes *lista = NULL;
 int qtd = 0;
 
-// FUNÇÕES
-
-/* FUNÇÕES NO ARQUIVO:
-    cadClientes()
-    exibeClientes()
-    menuAdm()
-    menuGeral()
-    telaCaixa()
-    telaClientes()
-    telaInicial()
-    telaUsuarios()
-    descontoTotal()
-    descontoProduto()
-    exibeProdutos()
-    limpaTela()
-*/
+// ---------- FUNÇÕES ----------
 
 // LIMPA TELA (limpa a tela)
 void limpaTela(){
     system("cls");
 }
 
+// EXIBE PRODUTOS (exibe os produtos)
+void exibeProdutos(int i, float valorProdutos[], float total){
+    for(int j = 0; j < i; j++){
+        printf("\n\tProduto %d: R$ %.2f", j + 1, valorProdutos[j]);
+    }
+
+    if(i > 0){
+        printf("\n\t\t-");
+
+        printf("\n\t  Total: R$ %.2f \n", total);
+        printf("\n----------------------------------\n");
+    }
+}
+
+// DESCONTO TOTAL (calcula o desconto total da compra)
 float descontoTotal(int i, float valorProdutos[], float totalSemDesc){
     float descontoPercentual, valorDesconto, valorFinal;
 
@@ -72,16 +73,15 @@ float descontoProduto(float preco, float desconto){
     return preco * (1 - desconto / 100);
 }
 
-
+// TELA CAIXA (tela do caixa)
 float telaCaixa(){
     float valorProdutos[100], total = 0, desconto;
-    char op;
-    int i = 0;
+    int op, i = 0;
 
     do{
         exibeProdutos(i, valorProdutos, total);
 
-        printf("\nDigite o valor do %dº produto: R$ ", i+1);
+        printf("\nDigite o valor do %dº produto: R$ ", i + 1);
         scanf("%f", &valorProdutos[i]);
 
         total += valorProdutos[i];
@@ -91,27 +91,26 @@ float telaCaixa(){
 
         exibeProdutos(i, valorProdutos, total);
 
-        printf("\nAdicionar mais um produto? (S/N)\n");
-        printf(" - Escolha: ");
+        printf("\nAdicionar mais um produto?\n");
+        printf("\n  1. Sim\n  2. Não\n");
+        printf("\n - Escolha: ");
         fflush(stdin);
-        scanf("%c", &op);
-
-        op = tolower(op);
+        scanf("%d", &op);
 
         limpaTela();
     }
-    while(op == 's' || op == '1');
+    while(op == 1);
 
     exibeProdutos(i, valorProdutos, total);
 
-    printf("\nAdicionar desconto ao valor total? (S/N)?");
+    printf("\nAdicionar desconto ao valor total?\n");
+    printf("\n  1. Sim\n  2. Não\n");
     printf("\n - Escolha: ");
-    fflush(stdin);
-    scanf("%c", &op);
+    scanf("%d", &op);
 
     limpaTela();
 
-    if(op == 's'){
+    if(op == 1){
         total = descontoTotal(i, valorProdutos, total);
     }
     else{
@@ -126,6 +125,7 @@ float telaCaixa(){
     return total;
 }
 
+// SAIR (sai do programa)
 void sair(){
     int op;
 
@@ -158,8 +158,7 @@ void sair(){
     while(op != 1 && op != 2);
 }
 
-// MENU ADM
-
+// MENU ADM (menu do adm)
 void menuAdm(){
     int op;
 
@@ -221,8 +220,7 @@ void menuAdm(){
     }
 }
 
-
-
+// TELA USUARIOS (tela de usuarios)
 void telaUsuarios(){
     int op;
 
@@ -260,7 +258,7 @@ void telaUsuarios(){
     }
 }
 
-// MENU PRINCIPAL
+// MENU PRINCIPAL (na verdade é a tela de login mas tudo começa aqui)
 void telaInicial(){
     incluirAdm();
 
@@ -361,6 +359,7 @@ void exibeClientes(const clientes *lista, int qtd) {
     limpaTela();
 }
 
+// TELA CLIENTES (tela de clientes)
 void telaClientes(){
     int op;
 
@@ -398,20 +397,7 @@ void telaClientes(){
     }
 }
 
-// EXIBE PRODUTOS (exibe os produtos)
-void exibeProdutos(int i, float valorProdutos[], float total){
-    for(int j = 0; j < i; j++){
-        printf("\n\tProduto %d: R$ %.2f", j + 1, valorProdutos[j]);
-    }
-
-    if(i > 0) printf("\n\t\t-");
-
-    printf("\n\t  Total: R$ %.2f \n", total);
-    printf("\n----------------------------------\n");
-}
-
-// MÓDULO CAIXA DESCONTO (calcula o desconto total da compra)
-
+// MENU GERAL (menu geral não do adm)
 void menuGeral(){
     int op;
 
@@ -466,8 +452,3 @@ void menuGeral(){
         }
     }
 }
-
-// SOMA PRODUTOS (soma os produtos)
-
-
-
